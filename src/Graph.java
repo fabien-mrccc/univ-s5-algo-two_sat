@@ -1,5 +1,3 @@
-package com.company;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -39,10 +37,10 @@ public class Graph<Label> {
 
     public String toString() {
         String result = new String("");
-        result.concat(cardinal + "\n");
+        result = result.concat(cardinal + "\n");
         for (int i = 0; i<cardinal;i++) {
             for (Edge e : incidency.get(i)) {
-                result.concat(e.source + " " + e.destination + " "
+                result = result.concat(e.source + " " + e.destination + " "
                         + e.label.toString() + "\n");
             }
         }
