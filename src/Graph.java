@@ -45,7 +45,7 @@ public class Graph<Label> {
         result = result.concat("\nArcs : \n");
         for (int i = 0; i<cardinal;i++) {
             for (Edge e : incidency.get(i)) {
-                result = result.concat(e.source + " " + e.destination + " "
+                result = result.concat(e.source + " -> " + e.destination + ", étiquette : "
 				       + e.label.toString() + "\n");
             }
         }
