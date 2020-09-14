@@ -17,3 +17,6 @@ test:
 # Pour la cible suivante, on vous laisse faire
 clean:
 
+# Voici une cible complète, pour créer son rendu de tp 
+zip:
+	moi=$$(whoami) ; zip -r $${moi}_renduTP1.zip *
