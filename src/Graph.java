@@ -37,16 +37,20 @@ public class Graph<Label> {
 
     public String toString() {
         String result = new String("");
-        result = result.concat(cardinal + "\n");
+        result = result.concat("Nombre sommets : " + cardinal + "\n");
+        result = result.concat("Sommets : \n");
+        for (int i = 0; i<cardinal;i++) {
+	    result = result.concat(i + " ");
+		}
+        result = result.concat("\nArcs : \n");
         for (int i = 0; i<cardinal;i++) {
             for (Edge e : incidency.get(i)) {
                 result = result.concat(e.source + " " + e.destination + " "
-                        + e.label.toString() + "\n");
+				       + e.label.toString() + "\n");
             }
         }
         return result;
-
+	
     }
-
-
+    
 }

@@ -1,6 +1,3 @@
-exec: Main.class
-	java Main
-
 compile: Main.class
 
 %.class: %.java
@@ -8,4 +5,7 @@ compile: Main.class
 
 clean:
 	-rm *.class
+
+exec: Main.class
+	java Main
 
