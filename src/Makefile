@@ -1,6 +1,6 @@
 # Le nom de votre classe principale
 # Renommez si nécessaire
-MAINCLASS=com.example.tp1.Main
+MAINCLASS=Main
 ## Le chemin vers où votre classe compilée est installée
 # Renommez si nécessaire
 INSTALLDIR=../out/production/TP1

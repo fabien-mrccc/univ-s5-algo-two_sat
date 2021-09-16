@@ -2,7 +2,7 @@
 ## Pour plus d'information sut un Makefile voir
 ## https://makefiletutorial.com/
 
-MAINCLASS=com.example.tp1.Main
+MAINCLASS=Main
 PRODUCTIONPATH=out/production/TP1
 
 all: compile install exec
