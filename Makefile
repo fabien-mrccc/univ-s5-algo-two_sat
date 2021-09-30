@@ -3,7 +3,15 @@
 ## https://makefiletutorial.com/
 
 MAINCLASS=Main
-PRODUCTIONPATH=out/production/TP1
+INSTALLDIR=out/production/TP1
+JARFILE=2SAT
+
+JAR=/usr/bin/jar
+JAVA=/usr/bin/java
+
+#JAR=/usr/local/opt/openjdk/bin/jar
+#JAVA=/usr/local/opt/openjdk/bin/java
+
 
 all: compile install exec
 
@@ -14,20 +22,29 @@ compile:
 install:
 	cd src ; make install
 
+jar: compile
+	cd $(INSTALLDIR); \
+	echo Main-Class: $(subst /,.,$(MAINCLASS)) > manifest.txt ; \
+	$(JAR) cvfm $(JARFILE).jar manifest.txt ./
+	mv $(INSTALLDIR)/$(JARFILE).jar ./
+
 clean:
 	cd src ; make clean ; make cleanInstall
-	rm *.zip
+	rm *.zip *.jar manifest.*
+
 
 # Cible pour executer 
 exec:
-	java -classpath $(PRODUCTIONPATH) $(MAINCLASS)
+	$(JAVA) -classpath $(PRODUCTIONPATH) $(MAINCLASS)
+
+execjar: $(JARFILE).jar
+	$(JAVA) -jar $(JARFILE).jar
 
 # Executer automatiquent les test
 # On s'attend (d'habitude) que pour claque classe MaClasse il y ait une
 # classe TestMaClasse qui vorifie le bon comportment de chaque methode de la classe
 # sur au moins une entrée
 test:
-
 
 # Cible pour créer son rendu de tp 
 zip:
