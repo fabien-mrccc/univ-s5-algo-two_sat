@@ -9,9 +9,10 @@ JARFILE=2SAT
 
 #JREBIN=/usr/bin
 #JREBIN=/usr/local/opt/openjdk/bin
-ECLIPSE_LOC=/Applications/Eclipse\ Java.app
-JREBIN=$(ECLIPSE_LOC)/Contents/Eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.macosx.x86_64_16.0.2.v20210721-1149/jre/bin
-
+#ECLIPSE_LOC=/Applications/Eclipse\ Java.app
+#JREBIN=$(ECLIPSE_LOC)/Contents/Eclipse/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.macosx.x86_64_16.0.2.v20210721-1149/jre/bin
+ECLIPSE_LOC=/opt/eclipse-jee-2021-03
+JREBIN=$(ECLIPSE_LOC)/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.linux.x86_64_15.0.2.v20210201-0955/jre/bin/
 JAVAC=$(JREBIN)/javac
 JAR=$(JREBIN)/jar
 JAVA=$(JREBIN)/java
