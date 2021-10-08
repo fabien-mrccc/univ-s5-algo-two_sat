@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class Graph<Label> {
+public class Graph<Label>  {
 
     private class Edge {
         public int source;
@@ -31,7 +31,10 @@ public class Graph<Label> {
         return cardinal;
     }
 
-    public void addArc(int source, int dest, Label label) {
+    public void addArc(int source, int dest, Label label) throws Exception {
+	if (Math.max(source,dest) >= this.cardinal){
+	    throw new Exception("Sommets trop gros pour la taille du graphe");
+	}
         incidency.get(source).addLast(new Edge(source,dest,label));
     }
 
