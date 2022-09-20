@@ -4,6 +4,7 @@
 
 INSTALLDIR=out/production/TP1
 MAINCLASS=Main
+#MAINCLASS=TestTryCatch
 JARFILE=2SAT
 
 JDKBIN=$(shell dirname `which java`)

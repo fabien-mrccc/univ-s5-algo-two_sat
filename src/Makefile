@@ -8,7 +8,6 @@ INSTALLDIR=out/production/TP1
 # INSTALLATION COURANTE
 JAVAC=javac
 
-
 MAINDIR=$(dir $(subst .,/,$(MAINCLASS)))
 
 compile: $(subst .,/,$(MAINCLASS)).class
