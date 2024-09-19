@@ -31,7 +31,7 @@ public class Graph<Label>  {
         return cardinal;
     }
 
-    public void addArc(int source, int dest, Label label) throws Exception {
+    public void addEdge(int source, int dest, Label label) throws Exception {
 	if (Math.max(source,dest) >= this.cardinal){
 	    throw new Exception("Sommets trop gros pour la taille du graphe");
 	}
