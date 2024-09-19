@@ -15,20 +15,15 @@ public class Graph<Label>  {
         }
     }
 
-    private int cardinal;
-    private ArrayList<LinkedList<Edge>> incidency;
-
+    protected int cardinal;
+    private final ArrayList<LinkedList<Edge>> incidency;
 
     public Graph(int size) {
         cardinal = size;
         incidency = new ArrayList<LinkedList<Edge>>(size+1);
-        for (int i = 0;i<cardinal;i++) {
+        for (int i = 0; i<cardinal; i++) {
             incidency.add(i, new LinkedList<Edge>());
         }
-    }
-
-    public int order() {
-        return cardinal;
     }
 
     public void addEdge(int source, int dest, Label label) throws Exception {
@@ -53,7 +48,5 @@ public class Graph<Label>  {
             }
         }
         return result;
-	
     }
-    
 }
