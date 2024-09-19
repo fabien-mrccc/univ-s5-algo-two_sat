@@ -24,7 +24,6 @@ public class Main {
             exit(-1);
         }*/
         exit(0);
-
     }
 
     private static void buildImplicationGraph(String[] args) {
