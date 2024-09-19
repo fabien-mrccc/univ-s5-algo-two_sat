@@ -15,23 +15,18 @@ public class Graph<Label>  {
         }
     }
 
-    private int cardinal;
-    private ArrayList<LinkedList<Edge>> incidency;
-
+    protected int cardinal;
+    private final ArrayList<LinkedList<Edge>> incidency;
 
     public Graph(int size) {
         cardinal = size;
         incidency = new ArrayList<LinkedList<Edge>>(size+1);
-        for (int i = 0;i<cardinal;i++) {
+        for (int i = 0; i<cardinal; i++) {
             incidency.add(i, new LinkedList<Edge>());
         }
     }
 
-    public int order() {
-        return cardinal;
-    }
-
-    public void addArc(int source, int dest, Label label) throws Exception {
+    public void addEdge(int source, int dest, Label label) throws Exception {
 	if (Math.max(source,dest) >= this.cardinal){
 	    throw new Exception("Sommets trop gros pour la taille du graphe");
 	}
@@ -53,7 +48,5 @@ public class Graph<Label>  {
             }
         }
         return result;
-	
     }
-    
 }
