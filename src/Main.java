@@ -8,19 +8,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String filename = "formulas/formula.txt";
-        if (0 < args.length) {
-            filename = args[0];
-        }
-
-        try (BufferedReader lecteur = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = lecteur.readLine()) != null) {
-                System.out.println(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        buildImplicationGraph(args);
 
         /*Parser parser = new Parser();
         Graph<String> graph = parser.parse(filename);
@@ -39,4 +27,19 @@ public class Main {
 
     }
 
+    private static void buildImplicationGraph(String[] args) {
+        String filename = "formulas/formula.txt";
+        if (0 < args.length) {
+            filename = args[0];
+        }
+
+        try (BufferedReader lecteur = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = lecteur.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
