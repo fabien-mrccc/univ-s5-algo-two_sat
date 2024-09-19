@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 import static java.lang.System.exit;
 
 public class Main {
@@ -9,7 +13,16 @@ public class Main {
             filename = args[0];
         }
 
-        Parser parser = new Parser();
+        try (BufferedReader lecteur = new BufferedReader(new FileReader(filename))) {
+            String line;
+            while ((line = lecteur.readLine()) != null) {
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        /*Parser parser = new Parser();
         Graph<String> graph = parser.parse(filename);
 
         Kosaraju k = new Kosaraju(graph);
@@ -21,7 +34,7 @@ public class Main {
         } else {
             System.out.println("Formula " + filename + ": unsatisfiable");
             exit(-1);
-        }
+        }*/
         exit(0);
 
     }
