@@ -33,9 +33,9 @@ public class Main {
             filename = args[0];
         }
 
-        try (BufferedReader lecteur = new BufferedReader(new FileReader(filename))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
             String line;
-            while ((line = lecteur.readLine()) != null) {
+            while ((line = bufferedReader.readLine()) != null) {
                 System.out.println(line);
             }
         } catch (IOException e) {
