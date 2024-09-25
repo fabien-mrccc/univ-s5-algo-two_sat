@@ -15,7 +15,7 @@ public class Graph<Label>  {
         }
     }
 
-    protected int cardinal;
+    private final int cardinal;
     private final ArrayList<LinkedList<Edge>> incidency;
 
     public Graph(int size) {
@@ -52,5 +52,9 @@ public class Graph<Label>  {
 
     protected LinkedList<Edge> getEdges(int index) {
         return incidency.get(index);
+    }
+
+    protected int getCardinal() {
+        return cardinal;
     }
 }
