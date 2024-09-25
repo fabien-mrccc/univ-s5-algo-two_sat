@@ -34,7 +34,7 @@ public class Graph<Label>  {
     }
 
     public String toString() {
-        String result = new String("");
+        String result = "";
         result = result.concat("Nombre sommets : " + cardinal + "\n");
         result = result.concat("Sommets : \n");
         for (int i = 0; i<cardinal;i++) {
