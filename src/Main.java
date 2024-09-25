@@ -2,6 +2,8 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.System.exit;
 
@@ -42,7 +44,7 @@ public class Main {
             String[] cardinalLine = bufferedReader.readLine().split(" ");
             int size = 2* Integer.parseInt(cardinalLine[2]);
             ImplicationGraph implicationGraph = initializeGraph(size);
-            fillGraph(bufferedReader, implicationGraph, size);
+            fillGraph(bufferedReader, implicationGraph);
             System.out.println(implicationGraph);
 
         } catch (IOException e) {
@@ -51,6 +53,7 @@ public class Main {
             throw new RuntimeException(e);
         }
     }
+
 
     /**
      * Initialize the graph with a length equal to size.
@@ -65,15 +68,20 @@ public class Main {
      * Fills the graph with the edges appearing on the file.
      * @param bufferedReader the bufferedReader to read the file.
      * @param implicationGraph the graph we want to fill.
-     * @param size the size of the graph
      * @throws Exception
      */
-    private static void fillGraph(BufferedReader bufferedReader,ImplicationGraph implicationGraph, int size) throws Exception {
+    private static void fillGraph(BufferedReader bufferedReader,ImplicationGraph implicationGraph) throws Exception {
         while ((bufferedReader.readLine()) != null) {
-            String[] EdgeLine = bufferedReader.readLine().split(" ");
-            implicationGraph.addEdge( getVertexIndex(Integer.parseInt(EdgeLine[0]), size), getVertexIndex(Integer.parseInt(EdgeLine[1]), size)
-                    ,EdgeLine[2]);
+            String[] clauseLine = bufferedReader.readLine().split(" ");
+            changeClauseIntoEdges(implicationGraph, clauseLine);
         }
+    }
+
+    private static void changeClauseIntoEdges(ImplicationGraph implicationGraphs, String[] clauseLine) throws Exception {
+        implicationGraphs.addEdge(getVertexIndex(- Integer.parseInt(clauseLine[0]), implicationGraphs.getCardinal()),
+                getVertexIndex(Integer.parseInt(clauseLine[1]), implicationGraphs.getCardinal()),clauseLine[2]);
+        implicationGraphs.addEdge(getVertexIndex(- Integer.parseInt(clauseLine[1]), implicationGraphs.getCardinal()),
+                getVertexIndex(Integer.parseInt(clauseLine[0]), implicationGraphs.getCardinal()),clauseLine[2]);
     }
 
     /**
