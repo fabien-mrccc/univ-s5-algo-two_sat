@@ -3,7 +3,7 @@ import java.util.LinkedList;
 
 public class Graph<Label>  {
 
-    private class Edge {
+    protected class Edge {
         public int source;
         public int destination;
         public Label label;
@@ -48,5 +48,9 @@ public class Graph<Label>  {
             }
         }
         return result;
+    }
+
+    protected LinkedList<Edge> getEdges(int index) {
+        return incidency.get(index);
     }
 }
