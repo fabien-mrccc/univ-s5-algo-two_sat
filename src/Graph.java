@@ -20,9 +20,9 @@ public class Graph<Label>  {
 
     public Graph(int size) {
         cardinal = size;
-        incidency = new ArrayList<LinkedList<Edge>>(size+1);
+        incidency = new ArrayList<>(size + 1);
         for (int i = 0; i<cardinal; i++) {
-            incidency.add(i, new LinkedList<Edge>());
+            incidency.add(i, new LinkedList<>());
         }
     }
 
