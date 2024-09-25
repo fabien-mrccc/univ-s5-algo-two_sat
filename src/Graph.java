@@ -13,6 +13,7 @@ public class Graph<Label>  {
             this.destination = to;
             this.label = label;
         }
+
     }
 
     private final int cardinal;
@@ -36,14 +37,14 @@ public class Graph<Label>  {
     public String toString() {
         String result = "";
         result = result.concat("Nombre sommets : " + cardinal + "\n");
-        result = result.concat("Sommets : \n");
+        result = result.concat("literal/index : \n");
         for (int i = 0; i<cardinal;i++) {
-	    result = result.concat(i + " ");
+	    result = result.concat(getVertex(i,cardinal) + "/"+ i + " ");
 		}
         result = result.concat("\nArcs : \n");
         for (int i = 0; i<cardinal;i++) {
             for (Edge e : incidency.get(i)) {
-                result = result.concat(e.source + " -> " + e.destination + ", étiquette : "
+                result = result.concat(getVertex(e.source, cardinal) + " -> " + getVertex(e.destination, cardinal) + ", étiquette : "
 				       + e.label.toString() + "\n");
             }
         }
@@ -56,5 +57,12 @@ public class Graph<Label>  {
 
     protected int getCardinal() {
         return cardinal;
+    }
+
+    protected int getVertex(int index, int size){
+        if(index < size/2){
+            return index - size/2;
+        }
+        return index - size/2 +1;
     }
 }
