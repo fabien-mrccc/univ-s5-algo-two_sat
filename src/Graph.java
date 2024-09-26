@@ -13,7 +13,6 @@ public class Graph<Label>  {
             this.destination = to;
             this.label = label;
         }
-
     }
 
     private final int cardinal;
@@ -35,21 +34,25 @@ public class Graph<Label>  {
     }
 
     public String toString() {
-        String result = "";
+        String result = new String("");
         result = result.concat("Nombre sommets : " + cardinal + "\n");
-        result = result.concat("literal/index : \n");
+        result = result.concat("Sommets : \n");
         for (int i = 0; i<cardinal;i++) {
-	    result = result.concat(getVertex(i,cardinal) + "/"+ i + " ");
-		}
+            result = result.concat(i + " ");
+        }
+
         result = result.concat("\nArcs : \n");
+
         for (int i = 0; i<cardinal;i++) {
             for (Edge e : incidency.get(i)) {
-                result = result.concat(getVertex(e.source, cardinal) + " -> " + getVertex(e.destination, cardinal) + ", étiquette : "
-				       + e.label.toString() + "\n");
+                result = result.concat(e.source + " -> " + e.destination + ", étiquette : "
+                        + e.label.toString() + "\n");
             }
         }
         return result;
+
     }
+
 
     protected LinkedList<Edge> getEdges(int index) {
         return incidency.get(index);
@@ -59,10 +62,18 @@ public class Graph<Label>  {
         return cardinal;
     }
 
-    protected int getVertex(int index, int size){
-        if(index < size/2){
-            return index - size/2;
+    public Graph<Label> mirror () throws Exception {
+        Graph<Label> mirror = new Graph<>(getCardinal());
+
+        for (int index = 0; index < getCardinal(); index++){
+            addReversedEdges(mirror, index);
         }
-        return index - size/2 +1;
+        return mirror;
+    }
+
+    private void addReversedEdges(Graph<Label> mirror, int index) throws Exception {
+        for(Edge edge : getEdges(index)) {
+            mirror.addEdge(edge.destination, edge.source, edge.label);
+        }
     }
 }
