@@ -54,7 +54,6 @@ public class Graph<Label>  {
         return result;
     }
 
-
     protected LinkedList<Edge> getEdges(int index) {
         return incidency.get(index);
     }
