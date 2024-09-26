@@ -34,21 +34,25 @@ public class Graph<Label>  {
     }
 
     public String toString() {
-        String result = "";
+        String result = new String("");
         result = result.concat("Nombre sommets : " + cardinal + "\n");
         result = result.concat("Sommets : \n");
         for (int i = 0; i<cardinal;i++) {
-	    result = result.concat(i + " ");
-		}
+            result = result.concat(i + " ");
+        }
+
         result = result.concat("\nArcs : \n");
+
         for (int i = 0; i<cardinal;i++) {
             for (Edge e : incidency.get(i)) {
                 result = result.concat(e.source + " -> " + e.destination + ", étiquette : "
-				       + e.label.toString() + "\n");
+                        + e.label.toString() + "\n");
             }
         }
         return result;
+
     }
+
 
     protected LinkedList<Edge> getEdges(int index) {
         return incidency.get(index);
@@ -56,5 +60,20 @@ public class Graph<Label>  {
 
     protected int getCardinal() {
         return cardinal;
+    }
+
+    public Graph<Label> mirror () throws Exception {
+        Graph<Label> mirror = new Graph<>(getCardinal());
+
+        for (int index = 0; index < getCardinal(); index++){
+            addReversedEdges(mirror, index);
+        }
+        return mirror;
+    }
+
+    private void addReversedEdges(Graph<Label> mirror, int index) throws Exception {
+        for(Edge edge : getEdges(index)) {
+            mirror.addEdge(edge.destination, edge.source, edge.label);
+        }
     }
 }
