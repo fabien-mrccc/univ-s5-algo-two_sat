@@ -33,20 +33,21 @@ public class ImplicationGraph extends Graph<Integer> {
         return index - getCardinal()/2 +1;
     }
 
+    @Override
     public String toString() {
         String result = "";
-        result = result.concat(STR."Nombre sommets : \{getCardinal()}\n");
-        result = result.concat("Litteral/Index : \n");
+        result = result.concat("\nNombre sommets : "+ getCardinal() + "\n\n");
+        result = result.concat("Littéral/Index : ");
 
-        for (int i = 0; i<getCardinal();i++) {
-            result = result.concat(STR."\{getLiteral(i)}/\{i} ");
+        for (int i = 0; i<getCardinal(); i++) {
+            result = result.concat(getLiteral(i) + "/" + i + " ");
         }
 
-        result = result.concat("\nArcs : \n");
+        result = result.concat("\n\nArcs : \n");
 
-        for (int i = 0; i<getCardinal();i++) {
+        for (int i = 0; i<getCardinal(); i++) {
             for (Edge e : getEdges(i)) {
-                result = result.concat(STR."\{getLiteral(e.source)} -> \{getLiteral(e.destination)}, étiquette : \{e.label.toString()}\n");
+                result = result.concat(getLiteral(e.source) + " -> " + getLiteral(e.destination) + ", étiquette : " + e.label.toString() + "\n");
             }
         }
         return result;
