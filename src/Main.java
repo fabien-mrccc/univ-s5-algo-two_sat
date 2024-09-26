@@ -9,7 +9,7 @@ public class Main {
         }
 
         Parser graphParser = new Parser();
-        ImplicationGraph implicationGraph = graphParser.buildImplicationGraph( filename);
+        ImplicationGraph implicationGraph = graphParser.buildImplicationGraph(filename);
 
         /*
         Kosaraju k = new Kosaraju(graph);
