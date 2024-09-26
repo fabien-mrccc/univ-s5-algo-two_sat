@@ -33,24 +33,25 @@ public class Graph<Label>  {
         incidency.get(source).addLast(new Edge(source,dest,label));
     }
 
+    @Override
     public String toString() {
-        String result = new String("");
-        result = result.concat("Nombre sommets : " + cardinal + "\n");
-        result = result.concat("Sommets : \n");
-        for (int i = 0; i<cardinal;i++) {
+        String result = "";
+        result = result.concat("\nNombre sommets : "+ getCardinal() + "\n\n");
+        result = result.concat("Sommets : ");
+
+        for (int i = 0; i<getCardinal(); i++) {
             result = result.concat(i + " ");
         }
 
-        result = result.concat("\nArcs : \n");
+        result = result.concat("\n\nArcs : \n");
 
-        for (int i = 0; i<cardinal;i++) {
-            for (Edge e : incidency.get(i)) {
+        for (int i = 0; i<getCardinal(); i++) {
+            for (Edge e : getEdges(i)) {
                 result = result.concat(e.source + " -> " + e.destination + ", étiquette : "
                         + e.label.toString() + "\n");
             }
         }
         return result;
-
     }
 
 
