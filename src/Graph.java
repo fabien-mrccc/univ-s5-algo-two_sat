@@ -50,6 +50,7 @@ public class Graph<Label>  {
             }
         }
         return result;
+
     }
 
     /**
@@ -103,5 +104,17 @@ public class Graph<Label>  {
 
     protected int getCardinal() {
         return cardinal;
+    }
+
+    public  LinkedList<Edge> getIncidents(int index) {
+        return incidence.get(index);
+    }
+
+    public LinkedList<Integer> getIndexes(){
+        LinkedList<Integer> indexes = new LinkedList<>();
+        for(int index = 0; index < cardinal; index++){
+            indexes.add(index);
+        }
+        return indexes;
     }
 }
