@@ -2,12 +2,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 public class Parser {
+
     /**
-     * Builds the graph related to the file given.
+     * Builds the implication graph related to the file given.
      * @param filename the file to read
      */
     public ImplicationGraph buildImplicationGraph(String filename) {
-
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
             bufferedReader.readLine();
@@ -15,8 +15,6 @@ public class Parser {
             int size = 2 * Integer.parseInt(cardinalLine[2]);
             ImplicationGraph implicationGraph = new ImplicationGraph(size);
             fillGraph(bufferedReader, implicationGraph);
-            System.out.println(implicationGraph);
-
             return implicationGraph;
 
         } catch (Exception e) {
@@ -30,7 +28,7 @@ public class Parser {
      * @param implicationGraph the graph we want to fill.
      * @throws Exception bufferedReader exception
      */
-    private static void fillGraph(BufferedReader bufferedReader,ImplicationGraph implicationGraph) throws Exception {
+    private void fillGraph(BufferedReader bufferedReader,ImplicationGraph implicationGraph) throws Exception {
         while ((bufferedReader.readLine()) != null) {
             String[] clauseLine = bufferedReader.readLine().split(" ");
             implicationGraph.addEdgesFromClause(clauseLine);
