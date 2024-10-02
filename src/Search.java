@@ -38,7 +38,7 @@ public class Search {
                 visitedIndex.add(index);
                 predecessor.set(index,null);
 
-                for(Graph<Integer>.Edge edge : graph.getIncidents(index)){
+                for(Graph<Integer>.Edge edge : graph.getEdges(index)){
                     explore(edge);
                 }
                 exitTime.set(index, time++);
@@ -61,7 +61,7 @@ public class Search {
             visitedIndex.add(destinationIndex);
             predecessor.set(destinationIndex, edge);
 
-            for( Graph<Integer>.Edge destinationEdge : graph.getIncidents(destinationIndex)){
+            for( Graph<Integer>.Edge destinationEdge : graph.getEdges(destinationIndex)){
                 explore(destinationEdge);
             }
             exitTime.set(destinationIndex, time++);
