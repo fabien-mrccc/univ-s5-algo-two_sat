@@ -3,7 +3,9 @@ import java.util.LinkedList;
 public class Search {
 
     private final Graph<Integer> graph;
+
     private final LinkedList<Graph<Integer>.Edge> predecessor;
+
     private final LinkedList<Integer> visitedIndex;
     private LinkedList<Integer> enteringTime;
     private LinkedList<Integer> iterationTime;
