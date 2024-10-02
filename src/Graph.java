@@ -3,7 +3,7 @@ import java.util.LinkedList;
 
 public class Graph<Label>  {
 
-    protected class Edge {
+    public class Edge {
         public int source;
         public int destination;
         public Label label;

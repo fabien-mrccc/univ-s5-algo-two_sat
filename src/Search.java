@@ -3,7 +3,9 @@ import java.util.LinkedList;
 public class Search {
 
     private final Graph<Integer> graph;
+
     private final LinkedList<Graph<Integer>.Edge> predecessor;
+
     private final LinkedList<Integer> visitedIndex;
     private LinkedList<Integer> enteringTime;
     private LinkedList<Integer> iterationTime;
@@ -27,8 +29,8 @@ public class Search {
      * and recording their predecessors, and returns the predecessor list.
      * @return the predecessor list.
      */
-    public LinkedList<Graph<Integer>.Edge> iterativeDFS(){
-        for(int index : graph.getIndexes()){
+    public LinkedList<Graph<Integer>.Edge> iterativeDFS(LinkedList<Integer> indexes){
+        for(int index : indexes){
 
             if(!visitedIndex.contains(index)){
                 enteringTime.set(index, time++);
