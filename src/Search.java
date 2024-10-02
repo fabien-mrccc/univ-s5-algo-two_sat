@@ -12,6 +12,11 @@ public class Search {
         this.visitedIndex = new LinkedList<>();
     }
 
+    /**
+     * Recursively explores the graph from the given edge, marking visited indexes and
+     * recording their predecessors.
+     * @param edge the edge from which begin the exploration.
+     */
     public void explore(Graph<Integer>.Edge edge){
         int destinationIndex = edge.destination;
         if(!visitedIndex.contains(destinationIndex)){
@@ -24,6 +29,11 @@ public class Search {
         }
     }
 
+    /**
+     * Performs an iterative depth-first search (DFS) on the graph, marking visited indexes
+     * and recording their predecessors, and returns the predecessor list.
+     * @return the predecessor list.
+     */
     public LinkedList<Graph<Integer>.Edge> iterativeDFS(){
         for(int index : graph.getIndexes()){
             if(!visitedIndex.contains(index)){
