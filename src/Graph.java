@@ -54,7 +54,7 @@ public class Graph<Label>  {
     }
 
 
-    protected LinkedList<Edge> getEdges(int index) {
+    public LinkedList<Edge> getEdges(int index) {
         return incidency.get(index);
     }
 
@@ -75,5 +75,9 @@ public class Graph<Label>  {
         for(Edge edge : getEdges(index)) {
             mirror.addEdge(edge.destination, edge.source, edge.label);
         }
+    }
+
+    public  LinkedList<Edge> getIncidents(int index) {
+        return incidency.get(index);
     }
 }
