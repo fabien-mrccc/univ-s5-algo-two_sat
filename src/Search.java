@@ -68,5 +68,8 @@ public class Search {
         }
     }
 
+    public LinkedList<Integer> getExitTime(){
+        return exitTime;
+    }
 
 }
