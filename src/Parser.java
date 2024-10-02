@@ -15,8 +15,6 @@ public class Parser {
             int size = 2 * Integer.parseInt(cardinalLine[2]);
             ImplicationGraph implicationGraph = new ImplicationGraph(size);
             fillGraph(bufferedReader, implicationGraph);
-
-            System.out.println(implicationGraph);
             return implicationGraph;
 
         } catch (Exception e) {
