@@ -73,16 +73,18 @@ public class Graph<Label>  {
      * The mirror image is a graph with all the edges reversed.
      *
      * @return A new {@code Graph<Label>} object that represents the mirrored graph.
-     *
-     * @throws Exception if an error occurs during the graph creation or edge reversal process.
      */
-    public Graph<Label> mirror () throws Exception {
-        Graph<Label> mirror = new Graph<>(getCardinal());
-
-        for (int index = 0; index < getCardinal(); index++){
-            addReversedEdges(mirror, index);
+    public Graph<Label> mirror () {
+        try {
+            Graph<Label> mirror = new Graph<>(getCardinal());
+            for (int index = 0; index < getCardinal(); index++){
+                addReversedEdges(mirror, index);
+            }
+            return mirror;
         }
-        return mirror;
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
