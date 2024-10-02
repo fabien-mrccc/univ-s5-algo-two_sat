@@ -1,38 +1,36 @@
-import java.lang.classfile.Label;
 import java.util.LinkedList;
 
 public class Search {
-    private final Graph<Label> graph;
 
-    private LinkedList<Graph<Label>.Edge> predecessor;
+    private final Graph<Integer> graph;
+    private final LinkedList<Graph<Integer>.Edge> predecessor;
+    private final LinkedList<Integer> visitedIndex;
 
-    private LinkedList<Integer> visitedIndex;
-
-    public Search(Graph<Label> graph){
+    public Search(Graph<Integer> graph){
         this.graph = graph;
         this.predecessor = new LinkedList<>();
         this.visitedIndex = new LinkedList<>();
     }
 
-    public void explore(Graph<Label>.Edge edge){
+    public void explore(Graph<Integer>.Edge edge){
         int destinationIndex = edge.destination;
         if(!visitedIndex.contains(destinationIndex)){
             visitedIndex.add(destinationIndex);
             predecessor.set(destinationIndex, edge);
         }
 
-        for( Graph<Label>.Edge destinationEdge : graph.getIncidents(destinationIndex)){
+        for(Graph<Integer>.Edge destinationEdge : graph.getIncidents(destinationIndex)){
             explore(destinationEdge);
         }
     }
 
-    public LinkedList<Graph<Label>.Edge> iterativeDFS(){
+    public LinkedList<Graph<Integer>.Edge> iterativeDFS(){
         for(int index : graph.getIndexes()){
             if(!visitedIndex.contains(index)){
                 visitedIndex.add(index);
                 predecessor.set(index,null);
             }
-            for(Graph<Label>.Edge edge : graph.getIncidents(index)){
+            for(Graph<Integer>.Edge edge : graph.getIncidents(index)){
                 explore(edge);
             }
         }
