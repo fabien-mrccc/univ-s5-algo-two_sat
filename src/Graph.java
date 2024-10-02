@@ -108,10 +108,6 @@ public class Graph<Label>  {
         return cardinal;
     }
 
-    public  LinkedList<Edge> getIncidents(int index) {
-        return incidence.get(index);
-    }
-
     public LinkedList<Integer> getIndexes(){
         LinkedList<Integer> indexes = new LinkedList<>();
         for(int index = 0; index < cardinal; index++){
