@@ -80,4 +80,12 @@ public class Graph<Label>  {
     public  LinkedList<Edge> getIncidents(int index) {
         return incidency.get(index);
     }
+
+    public LinkedList<Integer> getIndexes(){
+        LinkedList<Integer> indexes = new LinkedList<>();
+        for(int index = 0; index < cardinal; index++){
+            indexes.add(index);
+        }
+        return indexes;
+    }
 }
