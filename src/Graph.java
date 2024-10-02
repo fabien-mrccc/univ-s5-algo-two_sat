@@ -68,36 +68,6 @@ public class Graph<Label>  {
         incidence.get(source).addLast(new Edge(source,destination,label));
     }
 
-    /**
-     * Creates and returns a new graph that is the mirror image of the current graph.
-     * The mirror image is a graph with all the edges reversed.
-     *
-     * @return A new {@code Graph<Label>} object that represents the mirrored graph.
-     *
-     * @throws Exception if an error occurs during the graph creation or edge reversal process.
-     */
-    public Graph<Label> mirror () throws Exception {
-        Graph<Label> mirror = new Graph<>(getCardinal());
-
-        for (int index = 0; index < getCardinal(); index++){
-            addReversedEdges(mirror, index);
-        }
-        return mirror;
-    }
-
-    /**
-     * Adds reversed edges from the node at the given index to the mirror graph.
-     *
-     * @param mirror the graph to which reversed edges are added
-     * @param index the node index whose edges are reversed
-     * @throws Exception if an error occurs during edge processing
-     */
-    private void addReversedEdges(Graph<Label> mirror, int index) throws Exception {
-        for(Edge edge : getEdges(index)) {
-            mirror.addEdge(edge.destination, edge.source, edge.label);
-        }
-    }
-
     protected LinkedList<Edge> getEdges(int index) {
         return incidence.get(index);
     }

@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 import static java.lang.System.exit;
 
 public class Main {
@@ -12,11 +14,10 @@ public class Main {
         ImplicationGraph implicationGraph = graphParser.buildImplicationGraph(filename);
         System.out.println(implicationGraph);
 
+        LinkedList<Graph<Integer>.Edge> components = Kosaraju.process(implicationGraph);
+        System.out.println(components);
         /*
-        Kosaraju k = new Kosaraju(graph);
-        int[] composantes = k.sccs();
-
-        if (TwoSat.checkConsistency(composantes)) {
+        if (TwoSat.checkConsistency(components)) {
             System.out.println("Formula " + filename + ": satisfiable");
             exit(0);
         } else {

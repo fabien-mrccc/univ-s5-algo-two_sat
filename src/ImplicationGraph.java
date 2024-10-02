@@ -39,9 +39,11 @@ public class ImplicationGraph extends Graph<Integer> {
      */
     public void addEdgesFromClause(String[] clauseLine) throws Exception {
         addEdge(getLiteralIndex(- Integer.parseInt(clauseLine[0])),
-                getLiteralIndex(Integer.parseInt(clauseLine[1])),Integer.parseInt(clauseLine[2]));
+                getLiteralIndex(Integer.parseInt(clauseLine[1])),
+                Integer.parseInt(clauseLine[2]));
         addEdge(getLiteralIndex(- Integer.parseInt(clauseLine[1])),
-                getLiteralIndex(Integer.parseInt(clauseLine[0])),Integer.parseInt(clauseLine[2]));
+                getLiteralIndex(Integer.parseInt(clauseLine[0])),
+                Integer.parseInt(clauseLine[2]));
     }
 
     /**
@@ -75,5 +77,37 @@ public class ImplicationGraph extends Graph<Integer> {
             return index - getCardinal() / 2;
         }
         return index - getCardinal() / 2 + 1;
+    }
+
+    /**
+     * Creates and returns a new implication graph that is the mirror image of the current graph.
+     * The mirror image is a graph with all the edges reversed.
+     *
+     * @return A new {@code ImplicationGraph} object that represents the mirrored graph.
+     */
+    public ImplicationGraph mirror() {
+        try {
+            ImplicationGraph mirror = new ImplicationGraph(getCardinal());
+            for (int index = 0; index < getCardinal(); index++){
+                addReversedEdges(mirror, index);
+            }
+            return mirror;
+        }
+        catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Adds reversed edges from the node at the given index to the mirror graph.
+     *
+     * @param mirror the graph to which reversed edges are added
+     * @param index the node index whose edges are reversed
+     * @throws Exception if an error occurs during edge processing
+     */
+    private void addReversedEdges(ImplicationGraph mirror, int index) throws Exception {
+        for(Edge edge : getEdges(index)) {
+            mirror.addEdge(edge.destination, edge.source, edge.label);
+        }
     }
 }
