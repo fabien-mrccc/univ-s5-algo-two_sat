@@ -6,7 +6,7 @@ public class Search {
 
     private final LinkedList<Graph<Integer>.Edge> predecessors;
     private final LinkedList<Integer> visitedIndex;
-    private final LinkedList<Integer> enteringTime;
+    private final LinkedList<Integer> entryTime;
     private final LinkedList<Integer> iterationTime;
     private final LinkedList<Integer> exitTime;
 
@@ -17,11 +17,24 @@ public class Search {
         this.graph = graph;
         this.predecessors = new LinkedList<>();
         this.visitedIndex = new LinkedList<>();
-        this.enteringTime = new LinkedList<>();
+        this.entryTime = new LinkedList<>();
         this.iterationTime = new LinkedList<>();
         this.exitTime = new LinkedList<>();
+        initLinkedListAttributesWithEmptyValues();
         this.currentTime = 0;
         this.currentIteration = 0;
+    }
+
+    /**
+     * Initializes linked list attributes for graph traversal with default values.
+     */
+    private void initLinkedListAttributesWithEmptyValues() {
+        for (int index = 0; index < getGraph().getCardinal(); index++) {
+            getPredecessors().add(null);
+            getEntryTime().add(0);
+            getIterationTime().add(0);
+            getExitTime().add(0);
+        }
     }
 
     /**
@@ -32,56 +45,52 @@ public class Search {
     public LinkedList<Graph<Integer>.Edge> iterativeDFS(LinkedList<Integer> indexes) {
 
         for (int index : indexes) {
-            if (indexNotVisited(index)) {
-                updateEnteringTime(index);
-                updateIterationTime(index, incrementCurrentIteration());
-                registerVisitedIndex(index);
-                updatePredecessor(index, null);
-
-                for (Graph<Integer>.Edge edge : getGraph().getEdges(index)) {
-                    explore(edge);
-                }
-                updateExitTime(index);
-            }
+            explore(index, null, incrementCurrentIteration());
         }
         return getPredecessors();
     }
 
     /**
-     * Recursively explores the graph from the given edge, marking visited indexes and
-     * recording their predecessors.
-     * @param edge the edge from which begin the exploration.
+     * Recursively explores the graph starting from the specified index.
+     * <p>
+     * This method marks the current vertex as visited, updates its entering time,
+     * iteration time, and predecessor, then recursively explores its adjacent edges.
+     * The exit time is updated after all adjacent vertices have been explored.
+     * </p>
+     *
+     * @param index          The index of the vertex to explore.
+     * @param predecessor    The predecessor leading to the current vertex.
+     * @param iterationTime  The current iteration time for the exploration.
      */
-    public void explore(Graph<Integer>.Edge edge) {
-        int destinationIndex = edge.destination;
+    private void explore(int index, Graph<Integer>.Edge predecessor, int iterationTime) {
 
-        if (indexNotVisited(destinationIndex)) {
-            updateEnteringTime(destinationIndex);
-            updateIterationTime(destinationIndex, getCurrentIteration());
-            registerVisitedIndex(destinationIndex);
-            updatePredecessor(destinationIndex, edge);
+        if (indexNotVisited(index)) {
+            registerVisitedIndex(index);
+            updateEnteringTime(index);
+            updateIterationTime(index, iterationTime);
+            updatePredecessor(index, predecessor);
 
-            for (Graph<Integer>.Edge destinationEdge : getGraph().getEdges(destinationIndex)) {
-                explore(destinationEdge);
+            for (Graph<Integer>.Edge indexEdge : getGraph().getEdges(index)) {
+                explore(indexEdge.destination, indexEdge, getCurrentIteration());
             }
-            updateExitTime(destinationIndex);
+            updateExitTime(index);
         }
     }
 
     private boolean indexNotVisited(int index) {
-        return !visitedIndex.contains(index);
+        return !getVisitedIndex().contains(index);
     }
 
     private void updateEnteringTime(int index) {
-        enteringTime.set(index, incrementTime());
+        getEntryTime().set(index, incrementTime());
     }
 
     private void registerVisitedIndex(int index) {
-        visitedIndex.add(index);
+        getVisitedIndex().add(index);
     }
 
     private void updateIterationTime(int index, int iterationTime) {
-        this.iterationTime.set(index, iterationTime);
+        getIterationTime().set(index, iterationTime);
     }
 
     private void updatePredecessor(int index, Graph<Integer>.Edge edge) {
@@ -114,5 +123,17 @@ public class Search {
 
     private LinkedList<Graph<Integer>.Edge> getPredecessors() {
         return predecessors;
+    }
+
+    private LinkedList<Integer> getIterationTime() {
+        return iterationTime;
+    }
+
+    private LinkedList<Integer> getEntryTime() {
+        return entryTime;
+    }
+
+    private LinkedList<Integer> getVisitedIndex() {
+        return visitedIndex;
     }
 }
