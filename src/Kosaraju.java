@@ -12,12 +12,12 @@ public class Kosaraju {
     public static LinkedList<Graph<Integer>.Edge> process(ImplicationGraph originalGraph) {
         ImplicationGraph mirror = originalGraph.mirror();
         Search originalGraphSearch = new Search(originalGraph);
-        LinkedList<Integer> sortedExitTime;
+        LinkedList<Integer> sortedIndexesByExitTime;
         Search mirrorGraphSearch = new Search(mirror);
 
         originalGraphSearch.iterativeDFS(originalGraph.getIndexes());
-        sortedExitTime = sortVerticesByExitTimeDescending(originalGraphSearch.getExitTime());
-        return mirrorGraphSearch.iterativeDFS(sortedExitTime);
+        sortedIndexesByExitTime = sortIndexesByExitTimeDescending(originalGraphSearch.getExitTime());
+        return mirrorGraphSearch.iterativeDFS(sortedIndexesByExitTime);
     }
 
     /**
@@ -26,9 +26,13 @@ public class Kosaraju {
      * @param exitTime A linked list of exit times to be sorted.
      * @return A new linked list containing the exit times sorted in descending order.
      */
-    private static LinkedList<Integer> sortVerticesByExitTimeDescending(LinkedList<Integer> exitTime) {
-        LinkedList<Integer> sortedExitTime = new LinkedList<>(exitTime);
-        sortedExitTime.sort(Comparator.reverseOrder());
-        return sortedExitTime;
+    private static LinkedList<Integer> sortIndexesByExitTimeDescending(LinkedList<Integer> exitTime) {
+        LinkedList<Integer> sortedIndexesByExitTime = new LinkedList<>();
+        LinkedList<Integer> exitTimeSorted = new LinkedList<>(exitTime);
+        exitTimeSorted.sort(Comparator.reverseOrder());
+        for(int exit: exitTimeSorted){
+            sortedIndexesByExitTime.add(exitTime.indexOf(exit));
+        }
+        return sortedIndexesByExitTime;
     }
 }
