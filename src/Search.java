@@ -4,23 +4,24 @@ public class Search {
 
     private final Graph<Integer> graph;
 
-    private final LinkedList<Graph<Integer>.Edge> predecessor;
+    private final LinkedList<Graph<Integer>.Edge> predecessors;
     private final LinkedList<Integer> visitedIndex;
     private final LinkedList<Integer> enteringTime;
     private final LinkedList<Integer> iterationTime;
     private final LinkedList<Integer> exitTime;
-    private int time;
-    private int iteration;
+
+    private int currentTime;
+    private int currentIteration;
 
     public Search(Graph<Integer> graph) {
         this.graph = graph;
-        this.predecessor = new LinkedList<>();
+        this.predecessors = new LinkedList<>();
         this.visitedIndex = new LinkedList<>();
         this.enteringTime = new LinkedList<>();
         this.iterationTime = new LinkedList<>();
         this.exitTime = new LinkedList<>();
-        this.time = 0;
-        this.iteration = 0;
+        this.currentTime = 0;
+        this.currentIteration = 0;
     }
 
     /**
@@ -29,21 +30,21 @@ public class Search {
      * @return the predecessor list.
      */
     public LinkedList<Graph<Integer>.Edge> iterativeDFS(LinkedList<Integer> indexes) {
-        for (int index : indexes){
 
-            if (!visitedIndex.contains(index)) {
-                enteringTime.set(index, time++);
-                iterationTime.set(index, iteration++);
-                visitedIndex.add(index);
-                predecessor.set(index,null);
+        for (int index : indexes) {
+            if (indexNotVisited(index)) {
+                updateEnteringTime(index);
+                updateIterationTime(index, incrementCurrentIteration());
+                registerVisitedIndex(index);
+                updatePredecessor(index, null);
 
-                for (Graph<Integer>.Edge edge : graph.getEdges(index)) {
+                for (Graph<Integer>.Edge edge : getGraph().getEdges(index)) {
                     explore(edge);
                 }
-                exitTime.set(index, time++);
+                updateExitTime(index);
             }
         }
-        return predecessor;
+        return getPredecessors();
     }
 
     /**
@@ -54,20 +55,64 @@ public class Search {
     public void explore(Graph<Integer>.Edge edge) {
         int destinationIndex = edge.destination;
 
-        if (!visitedIndex.contains(destinationIndex)) {
-            enteringTime.set(destinationIndex, time++);
-            iterationTime.set(destinationIndex, iteration);
-            visitedIndex.add(destinationIndex);
-            predecessor.set(destinationIndex, edge);
+        if (indexNotVisited(destinationIndex)) {
+            updateEnteringTime(destinationIndex);
+            updateIterationTime(destinationIndex, getCurrentIteration());
+            registerVisitedIndex(destinationIndex);
+            updatePredecessor(destinationIndex, edge);
 
-            for ( Graph<Integer>.Edge destinationEdge : graph.getEdges(destinationIndex)) {
+            for (Graph<Integer>.Edge destinationEdge : getGraph().getEdges(destinationIndex)) {
                 explore(destinationEdge);
             }
-            exitTime.set(destinationIndex, time++);
+            updateExitTime(destinationIndex);
         }
+    }
+
+    private boolean indexNotVisited(int index) {
+        return !visitedIndex.contains(index);
+    }
+
+    private void updateEnteringTime(int index) {
+        enteringTime.set(index, incrementTime());
+    }
+
+    private void registerVisitedIndex(int index) {
+        visitedIndex.add(index);
+    }
+
+    private void updateIterationTime(int index, int iterationTime) {
+        this.iterationTime.set(index, iterationTime);
+    }
+
+    private void updatePredecessor(int index, Graph<Integer>.Edge edge) {
+        getPredecessors().set(index, edge);
+    }
+
+    private void updateExitTime(int index) {
+        getExitTime().set(index, incrementTime());
+    }
+
+    private int incrementTime() {
+        return currentTime++;
+    }
+
+    private int incrementCurrentIteration() {
+        return currentIteration++;
     }
 
     public LinkedList<Integer> getExitTime() {
         return exitTime;
+    }
+
+    private int getCurrentIteration() {
+        return currentIteration;
+    }
+
+    private Graph<Integer> getGraph() {
+        return graph;
+    }
+
+    private LinkedList<Graph<Integer>.Edge> getPredecessors() {
+        return predecessors;
     }
 }
