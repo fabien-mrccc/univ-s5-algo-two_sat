@@ -2,50 +2,27 @@ import java.util.LinkedList;
 
 public class TwoSat {
 
+    //TODO: utiliser getLiteral dans TwoSat et différencier les components pour l'évaluation de checkConsistency
+
     public static boolean checkConsistency(LinkedList<Edge<Integer>> components) {
-        /*
+
         LinkedList<Integer> literalsIndexes = componentLiteralsIndexes(components);
 
         for (int literalIndex : literalsIndexes) {
             if (containsOpposite(literalsIndexes,literalIndex)) { return false; }
         }
         return true;
-
-         */
-        return false;
     }
 
-    private static LinkedList<Graph<Integer>> buildGraphsFromComponents(LinkedList<Edge<Integer>> components) {
-
-        LinkedList<Edge<Integer>> componentsCopy = new LinkedList<>(components);
-        Graph<Integer> graph = new Graph<>(components.size());
-
-        for (Edge<Integer> edge : componentsCopy) {
-            try {
-                graph.addEdge(edge.getSource(), edge.getDestination(), edge.getLabel());
-            }
-            catch (Exception e) {
-                throw new RuntimeException();
-            }
-        }
-
-        while (!componentsCopy.isEmpty()) {
-            Search search = new Search(graph);
-            search.iterativeDFS(graph.getIndexes());
-        }
-        return null;
-    }
-
-    /*
-    private static LinkedList<Integer> componentLiteralsIndexes(LinkedList<Graph<Integer>.Edge> components) {
+    private static LinkedList<Integer> componentLiteralsIndexes(LinkedList<Edge<Integer>> components) {
         LinkedList<Integer> componentLiteralsIndexes = new LinkedList<>();
-        for (Graph<Integer>.Edge edge: components) {
+        for (Edge<Integer> edge: components) {
             if (edge != null) {
-                if (!componentLiteralsIndexes.contains(edge.source)) {
-                    componentLiteralsIndexes.add(edge.source);
+                if (!componentLiteralsIndexes.contains(edge.getSource())) {
+                    componentLiteralsIndexes.add(edge.getSource());
                 }
-                if (!componentLiteralsIndexes.contains(edge.destination)) {
-                    componentLiteralsIndexes.add(edge.destination);
+                if (!componentLiteralsIndexes.contains(edge.getDestination())) {
+                    componentLiteralsIndexes.add(edge.getDestination());
                 }
             }
         }
@@ -58,6 +35,4 @@ public class TwoSat {
         }
         return false;
     }
-
-     */
 }

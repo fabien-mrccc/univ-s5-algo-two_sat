@@ -1,4 +1,5 @@
 public class Edge<Label> {
+
     private final int source;
     private final int destination;
     private final Label label;

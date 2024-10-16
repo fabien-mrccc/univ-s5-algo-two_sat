@@ -16,7 +16,7 @@ public class ImplicationGraph extends Graph<Integer> {
 
         result = result.concat("\n\nArcs : \n");
 
-        for (int i = 0; i<getCardinal(); i++) {
+        for (int i = 0; i < getCardinal(); i++) {
             for (Edge<Integer> e : getEdges(i)) {
                 result = result.concat(getLiteral(e.getSource()) + " -> " + getLiteral(e.getDestination()) + ", étiquette : " + e.getLabel().toString() + "\n");
             }
