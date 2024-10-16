@@ -3,7 +3,6 @@ import java.util.LinkedList;
 
 public class Graph<Label>  {
 
-    //TODO: write an indie class
     public class Edge {
         public int source;
         public int destination;
@@ -51,7 +50,6 @@ public class Graph<Label>  {
             }
         }
         return result;
-
     }
 
     /**
