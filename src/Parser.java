@@ -29,9 +29,11 @@ public class Parser {
      * @throws Exception bufferedReader exception
      */
     private void fillGraph(BufferedReader bufferedReader,ImplicationGraph implicationGraph) throws Exception {
-        while ((bufferedReader.readLine()) != null) {
-            String[] clauseLine = bufferedReader.readLine().split(" ");
+        String line = bufferedReader.readLine();
+        while (line != null) {
+            String[] clauseLine = line.split(" ");
             implicationGraph.addEdgesFromClause(clauseLine);
+            line = bufferedReader.readLine();
         }
     }
 }

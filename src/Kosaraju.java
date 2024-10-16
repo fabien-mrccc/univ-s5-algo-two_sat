@@ -21,10 +21,10 @@ public class Kosaraju {
     }
 
     /**
-     * Sorts the exit times of the vertices in descending order and returns a new sorted list.
+     * Sorts the indexes by their exit times in descending order.
      *
      * @param exitTime A linked list of exit times to be sorted.
-     * @return A new linked list containing the exit times sorted in descending order.
+     * @return A linked list of indexes corresponding order by the sorted exit times in descending order.
      */
     private static LinkedList<Integer> sortIndexesByExitTimeDescending(LinkedList<Integer> exitTime) {
         LinkedList<Integer> sortedIndexesByExitTime = new LinkedList<>();
