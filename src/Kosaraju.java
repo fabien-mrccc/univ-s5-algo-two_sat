@@ -27,10 +27,12 @@ public class Kosaraju {
      * @return A linked list of indexes corresponding order by the sorted exit times in descending order.
      */
     private static LinkedList<Integer> sortIndexesByExitTimeDescending(LinkedList<Integer> exitTime) {
+
         LinkedList<Integer> sortedIndexesByExitTime = new LinkedList<>();
         LinkedList<Integer> exitTimeSorted = new LinkedList<>(exitTime);
         exitTimeSorted.sort(Comparator.reverseOrder());
-        for(int exit: exitTimeSorted){
+
+        for (int exit : exitTimeSorted) {
             sortedIndexesByExitTime.add(exitTime.indexOf(exit));
         }
         return sortedIndexesByExitTime;
