@@ -16,7 +16,7 @@ public class Main {
 
         LinkedList<Graph<Integer>.Edge> components = Kosaraju.process(implicationGraph);
         System.out.println(components);
-        /*
+
         if (TwoSat.checkConsistency(components)) {
             System.out.println("Formula " + filename + ": satisfiable");
             exit(0);
@@ -24,7 +24,7 @@ public class Main {
             System.out.println("Formula " + filename + ": unsatisfiable");
             exit(-1);
         }
-        */
+
         exit(0);
     }
 }
