@@ -40,11 +40,14 @@ public class Search {
     /**
      * Performs an iterative depth-first search (DFS) on the graph, marking visited indexes
      * and recording their predecessors, and returns the predecessor list.
-     * @return the predecessor list.
+     *
+     * @param indexes a list of indexes representing the order in which the traversal should be executed.
+     *                Each index corresponds to a vertex in the graph that will be explored in the given order.
+     * @return the predecessor list, which contains the predecessors of each visited vertex.
      */
     public LinkedList<Graph<Integer>.Edge> iterativeDFS(LinkedList<Integer> indexes) {
 
-        for (int index : indexes) {
+        for (Integer index : indexes) {
             explore(index, null, incrementCurrentIteration());
         }
         return getPredecessors();
