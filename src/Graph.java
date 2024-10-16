@@ -3,6 +3,7 @@ import java.util.LinkedList;
 
 public class Graph<Label>  {
 
+    //TODO: make Edge a specific class
     public class Edge {
         public int source;
         public int destination;
