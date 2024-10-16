@@ -4,7 +4,7 @@ public class Search {
 
     private final Graph<Integer> graph;
 
-    private final LinkedList<Graph<Integer>.Edge> predecessors;
+    private final LinkedList<Edge<Integer>> predecessors;
     private final LinkedList<Integer> visitedIndex;
     private final LinkedList<Integer> entryTime;
     private final LinkedList<Integer> iterationTime;
@@ -45,7 +45,7 @@ public class Search {
      *                Each index corresponds to a vertex in the graph that will be explored in the given order.
      * @return the predecessor list, which contains the predecessors of each visited vertex.
      */
-    public LinkedList<Graph<Integer>.Edge> iterativeDFS(LinkedList<Integer> indexes) {
+    public LinkedList<Edge<Integer>> iterativeDFS(LinkedList<Integer> indexes) {
 
         for (Integer index : indexes) {
             explore(index, null, incrementCurrentIteration());
@@ -65,7 +65,7 @@ public class Search {
      * @param predecessor    The predecessor leading to the current vertex.
      * @param iterationTime  The current iteration time for the exploration.
      */
-    private void explore(int index, Graph<Integer>.Edge predecessor, int iterationTime) {
+    private void explore(int index, Edge<Integer> predecessor, int iterationTime) {
 
         if (indexNotVisited(index)) {
             registerVisitedIndex(index);
@@ -73,8 +73,8 @@ public class Search {
             updateIterationTime(index, iterationTime);
             updatePredecessor(index, predecessor);
 
-            for (Graph<Integer>.Edge indexEdge : getGraph().getEdges(index)) {
-                explore(indexEdge.destination, indexEdge, getCurrentIteration());
+            for (Edge<Integer> indexEdge : getGraph().getEdges(index)) {
+                explore(indexEdge.getDestination(), indexEdge, getCurrentIteration());
             }
             updateExitTime(index);
         }
@@ -96,7 +96,7 @@ public class Search {
         getIterationTime().set(index, iterationTime);
     }
 
-    private void updatePredecessor(int index, Graph<Integer>.Edge edge) {
+    private void updatePredecessor(int index, Edge<Integer> edge) {
         getPredecessors().set(index, edge);
     }
 
@@ -124,7 +124,7 @@ public class Search {
         return graph;
     }
 
-    private LinkedList<Graph<Integer>.Edge> getPredecessors() {
+    private LinkedList<Edge<Integer>> getPredecessors() {
         return predecessors;
     }
 

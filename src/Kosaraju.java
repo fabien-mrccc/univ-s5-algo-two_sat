@@ -9,7 +9,7 @@ public class Kosaraju {
      * @param originalGraph The implication graph to be processed.
      * @return A linked list of edges resulting from the depth-first search on the mirrored graph.
      */
-    public static LinkedList<Graph<Integer>.Edge> process(ImplicationGraph originalGraph) {
+    public static LinkedList<Edge<Integer>> process(ImplicationGraph originalGraph) {
         ImplicationGraph mirror = originalGraph.mirror();
         Search originalGraphSearch = new Search(originalGraph);
         LinkedList<Integer> sortedIndexesByExitTime;

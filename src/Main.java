@@ -14,12 +14,12 @@ public class Main {
         ImplicationGraph implicationGraph = graphParser.buildImplicationGraph(filename);
         System.out.println(implicationGraph);
 
-        LinkedList<Graph<Integer>.Edge> components = Kosaraju.process(implicationGraph);
+        LinkedList<Edge<Integer>> components = Kosaraju.process(implicationGraph);
         System.out.println(components);
 
-        for (Graph<Integer>.Edge edge : components) {
+        for (Edge<Integer> edge : components) {
             if (edge != null)
-                System.out.println(edge.source + " " + edge.destination);
+                System.out.println(edge.getSource() + " " + edge.getDestination());
         }
 
         if (TwoSat.checkConsistency(components)) {

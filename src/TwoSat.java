@@ -2,7 +2,7 @@ import java.util.LinkedList;
 
 public class TwoSat {
 
-    public static boolean checkConsistency(LinkedList<Graph<Integer>.Edge> components) {
+    public static boolean checkConsistency(LinkedList<Edge<Integer>> components) {
         /*
         LinkedList<Integer> literalsIndexes = componentLiteralsIndexes(components);
 
@@ -15,14 +15,14 @@ public class TwoSat {
         return false;
     }
 
-    private static LinkedList<Graph<Integer>> buildGraphsFromComponents(LinkedList<Graph<Integer>.Edge> components) {
+    private static LinkedList<Graph<Integer>> buildGraphsFromComponents(LinkedList<Edge<Integer>> components) {
 
-        LinkedList<Graph<Integer>.Edge> componentsCopy = new LinkedList<>(components);
+        LinkedList<Edge<Integer>> componentsCopy = new LinkedList<>(components);
         Graph<Integer> graph = new Graph<>(components.size());
 
-        for (Graph<Integer>.Edge edge : componentsCopy) {
+        for (Edge<Integer> edge : componentsCopy) {
             try {
-                graph.addEdge(edge.source, edge.destination, edge.label);
+                graph.addEdge(edge.getSource(), edge.getDestination(), edge.getLabel());
             }
             catch (Exception e) {
                 throw new RuntimeException();

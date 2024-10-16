@@ -1,6 +1,3 @@
-import java.util.LinkedList;
-import java.util.Stack;
-
 public class ImplicationGraph extends Graph<Integer> {
 
     public ImplicationGraph(int size) {
@@ -20,8 +17,8 @@ public class ImplicationGraph extends Graph<Integer> {
         result = result.concat("\n\nArcs : \n");
 
         for (int i = 0; i<getCardinal(); i++) {
-            for (Edge e : getEdges(i)) {
-                result = result.concat(getLiteral(e.source) + " -> " + getLiteral(e.destination) + ", étiquette : " + e.label.toString() + "\n");
+            for (Edge<Integer> e : getEdges(i)) {
+                result = result.concat(getLiteral(e.getSource()) + " -> " + getLiteral(e.getDestination()) + ", étiquette : " + e.getLabel().toString() + "\n");
             }
         }
         return result;
@@ -106,8 +103,8 @@ public class ImplicationGraph extends Graph<Integer> {
      * @throws Exception if an error occurs during edge processing
      */
     private void addReversedEdges(ImplicationGraph mirror, int index) throws Exception {
-        for(Edge edge : getEdges(index)) {
-            mirror.addEdge(edge.destination, edge.source, edge.label);
+        for(Edge<Integer> edge : getEdges(index)) {
+            mirror.addEdge(edge.getDestination(), edge.getSource(), edge.getLabel());
         }
     }
 }
