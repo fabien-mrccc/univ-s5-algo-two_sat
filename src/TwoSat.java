@@ -13,8 +13,22 @@ public class TwoSat {
 
         for (ArrayList<Integer> component : findConnectedComponents(components)) {
             for(Integer literalIndex : component){
-                if (containsOpposite(component,literalIndex)) { return false; }
+                if (containsOpposite(literalIndex, component)) { return false; }
             }
+        }
+        return true;
+        ArrayList<Integer> literalsIndexes = literalsIndexesFromComponents(components);
+
+        while (!literalsIndexes.isEmpty()) {
+
+            Edge<Integer> edge = components.removeFirst();
+            // ...
+        }
+
+        ArrayList<Integer> literals = literalsFromLiteralsIndexes(literalsIndexes);
+
+        for (int literal : literals) {
+            if (containsOpposite(literal, literals)) { return false; }
         }
         return true;
     }
@@ -33,7 +47,7 @@ public class TwoSat {
                 connectedComponents.add(component);  // Ajouter la composante trouvée
             }
         }
-    System.out.println("components: "+ connectedComponents);
+        System.out.println("components: "+ connectedComponents);
         return connectedComponents;
     }
 
@@ -86,10 +100,10 @@ public class TwoSat {
         return literals;
     }
 
-    private boolean containsOpposite(Integer literal, ArrayList<Integer> literals) {
+    private boolean containsOpposite(Integer literalToCompare, ArrayList<Integer> literals) {
 
-        for (int literalToCompare : literals) {
-            if (literalToCompare == -literal) { return true; }
+        for (int literal : literals) {
+            if (-literalToCompare == -literal) { return true; }
         }
         return false;
     }
