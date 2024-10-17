@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Search {
+public class IterativeDFSearch {
 
     private final Graph<Integer> graph;
 
@@ -13,7 +13,7 @@ public class Search {
     private int currentTime;
     private int currentIteration;
 
-    public Search(Graph<Integer> graph) {
+    public IterativeDFSearch(Graph<Integer> graph) {
         this.graph = graph;
         this.predecessors = new ArrayList<>();
         this.visitedIndex = new ArrayList<>();
@@ -29,6 +29,7 @@ public class Search {
      * Initializes ArrayList attributes for graph traversal with default values.
      */
     private void initArrayListAttributesWithEmptyValues() {
+
         for (int index = 0; index < getGraph().getCardinal(); index++) {
             getPredecessors().add(null);
             getEntryTime().add(0);
