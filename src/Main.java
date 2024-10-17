@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import static java.lang.System.exit;
@@ -14,7 +15,7 @@ public class Main {
         ImplicationGraph implicationGraph = graphParser.buildImplicationGraph(filename);
         System.out.println(implicationGraph);
 
-        LinkedList<Graph<Integer>.Edge> components = Kosaraju.process(implicationGraph);
+        ArrayList<Graph<Integer>.Edge> components = Kosaraju.process(implicationGraph);
         System.out.println(components);
 
         if (TwoSat.checkConsistency(components)) {

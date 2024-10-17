@@ -1,5 +1,5 @@
+import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.LinkedList;
 
 public class Kosaraju {
 
@@ -9,10 +9,10 @@ public class Kosaraju {
      * @param originalGraph The implication graph to be processed.
      * @return A linked list of edges resulting from the depth-first search on the mirrored graph.
      */
-    public static LinkedList<Graph<Integer>.Edge> process(ImplicationGraph originalGraph) {
+    public static ArrayList<Graph<Integer>.Edge> process(ImplicationGraph originalGraph) {
         ImplicationGraph mirror = originalGraph.mirror();
         Search originalGraphSearch = new Search(originalGraph);
-        LinkedList<Integer> sortedIndexesByExitTime;
+        ArrayList<Integer> sortedIndexesByExitTime;
         Search mirrorGraphSearch = new Search(mirror);
 
         originalGraphSearch.iterativeDFS(originalGraph.getIndexes());
@@ -26,10 +26,10 @@ public class Kosaraju {
      * @param exitTime A linked list of exit times to be sorted.
      * @return A linked list of indexes corresponding order by the sorted exit times in descending order.
      */
-    private static LinkedList<Integer> sortIndexesByExitTimeDescending(LinkedList<Integer> exitTime) {
+    private static ArrayList<Integer> sortIndexesByExitTimeDescending(ArrayList<Integer> exitTime) {
 
-        LinkedList<Integer> sortedIndexesByExitTime = new LinkedList<>();
-        LinkedList<Integer> exitTimeSorted = new LinkedList<>(exitTime);
+        ArrayList<Integer> sortedIndexesByExitTime = new ArrayList<>();
+        ArrayList<Integer> exitTimeSorted = new ArrayList<>(exitTime);
         exitTimeSorted.sort(Comparator.reverseOrder());
 
         for (int exit : exitTimeSorted) {

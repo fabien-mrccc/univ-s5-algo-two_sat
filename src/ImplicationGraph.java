@@ -1,6 +1,3 @@
-import java.util.LinkedList;
-import java.util.Stack;
-
 public class ImplicationGraph extends Graph<Integer> {
 
     public ImplicationGraph(int size) {
