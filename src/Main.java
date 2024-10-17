@@ -23,7 +23,7 @@ public class Main {
     }
 
     private static void printComponents(ArrayList<Edge<Integer>> components, ImplicationGraph implicationGraph) {
-        System.out.println("ALL COMPONENTS EDGES: " + "[index -> index], [literal -> literal]");
+        System.out.println("ALL UNIDENTIFIED COMPONENTS EDGES: " + "[index -> index], [literal -> literal]");
         for (Edge<Integer> edge : components) {
             if (edge != null)
                 System.out.println(edge.print(implicationGraph));
@@ -32,7 +32,11 @@ public class Main {
     }
     
     private static void printSatisfiability(TwoSat twoSat, String filePath) {
-        if (twoSat.checkConsistency()) {
+
+        boolean isConsistent = twoSat.checkConsistency();
+        System.out.println("\nSATISFIABILITY: ");
+
+        if (isConsistent) {
             System.out.println("Formula " + filePath + ": satisfiable");
             exit(0);
         }
