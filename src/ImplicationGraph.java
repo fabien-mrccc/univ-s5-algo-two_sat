@@ -69,7 +69,7 @@ public class ImplicationGraph extends Graph<Integer> {
      * @param index the index to be converted back to a literal
      * @return the corresponding literal (ranging from -k to k except 0)
      */
-    private int getLiteral(int index) {
+    public int getLiteral(int index) {
         if (index < getCardinal() / 2) {
             return index - getCardinal() / 2;
         }
