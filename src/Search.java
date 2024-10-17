@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class Search {
 
@@ -21,15 +20,15 @@ public class Search {
         this.entryTime = new ArrayList<>();
         this.iterationTime = new ArrayList<>();
         this.exitTime = new ArrayList<>();
-        initLinkedListAttributesWithEmptyValues();
+        initArrayListAttributesWithEmptyValues();
         this.currentTime = 0;
         this.currentIteration = 0;
     }
 
     /**
-     * Initializes linked list attributes for graph traversal with default values.
+     * Initializes ArrayList attributes for graph traversal with default values.
      */
-    private void initLinkedListAttributesWithEmptyValues() {
+    private void initArrayListAttributesWithEmptyValues() {
         for (int index = 0; index < getGraph().getCardinal(); index++) {
             getPredecessors().add(null);
             getEntryTime().add(0);
