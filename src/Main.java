@@ -1,30 +1,37 @@
 import java.util.ArrayList;
-
 import static java.lang.System.exit;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        String filePath = "formulas/testSet1/formula9.txt";
+        String filePath = "formulas/testSet1/formula2.txt";
         if (args.length > 0) {
             filePath = args[0];
         }
 
+        System.out.println("\nFILEPATH: " + filePath);
+
         ImplicationGraph implicationGraph = Parser.buildImplicationGraph(filePath);
         System.out.println(implicationGraph);
-        System.out.println(implicationGraph.mirror());
 
         ArrayList<Edge<Integer>> components = Kosaraju.process(implicationGraph);
-        System.out.println(components);
-
-        for (Edge<Integer> edge : components) {
-            if (edge != null)
-                System.out.println("component edge - " + edge.getSource() + " " + edge.getDestination());
-        }
+        printComponents(components, implicationGraph);
 
         TwoSat twoSat = new TwoSat(implicationGraph, components);
+        printSatisfiability(twoSat, filePath);
+    }
 
+    private static void printComponents(ArrayList<Edge<Integer>> components, ImplicationGraph implicationGraph) {
+        System.out.println("ALL COMPONENTS EDGES: " + "[index -> index], [literal -> literal]");
+        for (Edge<Integer> edge : components) {
+            if (edge != null)
+                System.out.println(edge.print(implicationGraph));
+        }
+        System.out.println();
+    }
+    
+    private static void printSatisfiability(TwoSat twoSat, String filePath) {
         if (twoSat.checkConsistency()) {
             System.out.println("Formula " + filePath + ": satisfiable");
             exit(0);
