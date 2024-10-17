@@ -1,4 +1,4 @@
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class TwoSat {
 
@@ -8,9 +8,9 @@ public class TwoSat {
         this.implicationGraph = implicationGraph;
     }
 
-    public boolean checkConsistency(LinkedList<Edge<Integer>> components) {
+    public boolean checkConsistency(ArrayList<Edge<Integer>> components) {
 
-        LinkedList<LinkedList<ImplicationGraph>> componentsGraphs = componentsGraphs(components);
+        ArrayList<ArrayList<ImplicationGraph>> componentsGraphs = componentsGraphs(components);
 
         //for (ImplicationGraph component : componentsGraphs) {
             //TODO ... inclure les commentaires ci-dessous dans cette boucle
@@ -30,13 +30,13 @@ public class TwoSat {
     }
 
     //TODO ...
-    private LinkedList<LinkedList<ImplicationGraph>> componentsGraphs (LinkedList<Edge<Integer>> components) {
+    private ArrayList<ArrayList<ImplicationGraph>> componentsGraphs (ArrayList<Edge<Integer>> components) {
         return null;
     }
 
-    private LinkedList<Integer> literalsIndexesFromComponents(LinkedList<Edge<Integer>> components) {
+    private ArrayList<Integer> literalsIndexesFromComponents(ArrayList<Edge<Integer>> components) {
 
-        LinkedList<Integer> literalsIndexes = new LinkedList<>();
+        ArrayList<Integer> literalsIndexes = new ArrayList<>();
 
         for (Edge<Integer> edge : components) {
 
@@ -52,9 +52,9 @@ public class TwoSat {
         return literalsIndexes;
     }
 
-    private LinkedList<Integer> literalsFromLiteralsIndexes(LinkedList<Integer> literalsIndexes) {
+    private ArrayList<Integer> literalsFromLiteralsIndexes(ArrayList<Integer> literalsIndexes) {
 
-        LinkedList<Integer> literals = new LinkedList<>();
+        ArrayList<Integer> literals = new ArrayList<>();
 
         for (int literalIndex : literalsIndexes) {
 
@@ -67,7 +67,7 @@ public class TwoSat {
         return literals;
     }
 
-    private boolean containsOpposite(Integer literal, LinkedList<Integer> literals) {
+    private boolean containsOpposite(Integer literal, ArrayList<Integer> literals) {
 
         for (int literalToCompare : literals) {
             if (literalToCompare == -literal) { return true; }
