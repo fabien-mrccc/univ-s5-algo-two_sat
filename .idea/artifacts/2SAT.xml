@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="2SAT">
+    <output-path>$PROJECT_DIR$/out/artifacts/2SAT</output-path>
+    <root id="archive" name="2SAT.jar">
+      <element id="module-output" name="s5-algo-tp1" />
+    </root>
+  </artifact>
+</component>
