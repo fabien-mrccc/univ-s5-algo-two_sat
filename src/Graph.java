@@ -29,7 +29,7 @@ public class Graph<Label>  {
             result = result.concat(i + " ");
         }
 
-        result = result.concat("\n\nEdges : \n");
+        result = result.concat("\n\nEDGES : \n");
 
         for (int i = 0; i<getCardinal(); i++) {
             for (Edge<Label> e : getEdges(i)) {
