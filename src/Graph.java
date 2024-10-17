@@ -49,7 +49,7 @@ public class Graph<Label>  {
      * @param label the label of the edge
      * @throws Exception if the source or destination exceeds the graph's size
      */
-    public void addEdge(int source, int destination, Label label) throws Exception {
+    protected void addEdge(int source, int destination, Label label) throws Exception {
 
         if (Math.max(source,destination) >= this.getCardinal()) {
 	        throw new Exception("Vertices value to high for the graph size.");
