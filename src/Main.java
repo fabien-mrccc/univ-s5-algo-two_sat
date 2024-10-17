@@ -6,7 +6,7 @@ import static java.lang.System.exit;
 public class Main {
 
     public static void main(String[] args) {
-        String filename = "formulas/formula.txt";
+        String filename = "formulas/testSet1/formula2.txt";
         if (args.length > 0) {
             filename = args[0];
         }

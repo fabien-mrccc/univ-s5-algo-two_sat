@@ -1,4 +1,4 @@
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 public class TwoSat {
 
@@ -6,12 +6,46 @@ public class TwoSat {
 
     public static boolean checkConsistency(ArrayList<Edge<Integer>> components) {
 
-        ArrayList<Integer> literalsIndexes = componentLiteralsIndexes(components);
-
-        for (int literalIndex : literalsIndexes) {
-            if (containsOpposite(literalsIndexes,literalIndex)) { return false; }
+        for (ArrayList<Integer> component : findConnectedComponents(components)) {
+            for(Integer literalIndex : component){
+                if (containsOpposite(component,literalIndex)) { return false; }
+            }
         }
         return true;
+    }
+
+    public static ArrayList<ArrayList<Integer>> findConnectedComponents(ArrayList<Edge<Integer>> predecessors) {
+        // Initialiser les composantes connexes
+        ArrayList<ArrayList<Integer>> connectedComponents = new ArrayList<>();
+        boolean[] visited = new boolean[predecessors.size()];
+
+        // Parcours des sommets
+        for (int i = 0; i < predecessors.size() ; i++) {
+            // Si le sommet n'a pas encore été visité
+            if (!visited[i]) {
+                ArrayList<Integer> component = new ArrayList<>();
+                dfs(i, predecessors, visited, component);
+                connectedComponents.add(component);  // Ajouter la composante trouvée
+            }
+        }
+    System.out.println("components: "+ connectedComponents);
+        return connectedComponents;
+    }
+
+    private static void dfs(int node, ArrayList<Edge<Integer>> predecessors, boolean[] visited, ArrayList<Integer> component) {
+        visited[node] = true;
+        component.add(node);
+
+        for (Edge edge : predecessors) {
+            if (edge != null) {
+                if (edge.getSource() == node && !visited[edge.getDestination()]) {
+                    dfs(edge.getDestination(), predecessors, visited, component);
+                }
+                if (edge.getDestination() == node && !visited[edge.getSource()]) {
+                    dfs(edge.getSource(), predecessors, visited, component);
+                }
+            }
+        }
     }
 
     private static ArrayList<Integer> componentLiteralsIndexes(ArrayList<Edge<Integer>> components){
