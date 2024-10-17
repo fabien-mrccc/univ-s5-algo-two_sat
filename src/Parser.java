@@ -5,15 +5,15 @@ public class Parser {
 
     /**
      * Builds the implication graph related to the file given.
-     * @param filename the file to read
+     * @param filename the path of the file to read
      */
-    public ImplicationGraph buildImplicationGraph(String filename) {
+    public static ImplicationGraph buildImplicationGraph(String filename) {
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
             bufferedReader.readLine();
             String[] cardinalLine = bufferedReader.readLine().split(" ");
-            int size = 2 * Integer.parseInt(cardinalLine[2]);
-            ImplicationGraph implicationGraph = new ImplicationGraph(size);
+            int graphSize = 2 * Integer.parseInt(cardinalLine[2]);
+            ImplicationGraph implicationGraph = new ImplicationGraph(graphSize);
             fillGraph(bufferedReader, implicationGraph);
             return implicationGraph;
 
@@ -28,7 +28,7 @@ public class Parser {
      * @param implicationGraph the graph we want to fill.
      * @throws Exception bufferedReader exception
      */
-    private void fillGraph(BufferedReader bufferedReader,ImplicationGraph implicationGraph) throws Exception {
+    private static void fillGraph(BufferedReader bufferedReader,ImplicationGraph implicationGraph) throws Exception {
         String line = bufferedReader.readLine();
         while (line != null) {
             String[] clauseLine = line.split(" ");
