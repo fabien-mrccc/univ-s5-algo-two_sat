@@ -11,40 +11,25 @@ public class TwoSat {
     //TODO ... traiter chaque component séparément
     public boolean checkConsistency(ArrayList<Edge<Integer>> components) {
 
-        for (ArrayList<Integer> component : findConnectedComponents(components)) {
-            for(Integer literalIndex : component){
-                if (containsOpposite(literalIndex, component)) { return false; }
+        for (ArrayList<Integer> component : findComponents(components)) {
+            ArrayList<Integer> literals = literalsFromLiteralsIndexes(component);
+            for(Integer literal : literals){
+                if (containsOpposite(literal, literals)) { return false; }
             }
         }
         return true;
-        ArrayList<Integer> literalsIndexes = literalsIndexesFromComponents(components);
 
-        while (!literalsIndexes.isEmpty()) {
-
-            Edge<Integer> edge = components.removeFirst();
-            // ...
-        }
-
-        ArrayList<Integer> literals = literalsFromLiteralsIndexes(literalsIndexes);
-
-        for (int literal : literals) {
-            if (containsOpposite(literal, literals)) { return false; }
-        }
-        return true;
     }
 
-    public static ArrayList<ArrayList<Integer>> findConnectedComponents(ArrayList<Edge<Integer>> predecessors) {
-        // Initialiser les composantes connexes
+    public static ArrayList<ArrayList<Integer>> findComponents(ArrayList<Edge<Integer>> predecessors) {
         ArrayList<ArrayList<Integer>> connectedComponents = new ArrayList<>();
         boolean[] visited = new boolean[predecessors.size()];
 
-        // Parcours des sommets
         for (int i = 0; i < predecessors.size() ; i++) {
-            // Si le sommet n'a pas encore été visité
             if (!visited[i]) {
                 ArrayList<Integer> component = new ArrayList<>();
                 dfs(i, predecessors, visited, component);
-                connectedComponents.add(component);  // Ajouter la composante trouvée
+                connectedComponents.add(component);
             }
         }
         System.out.println("components: "+ connectedComponents);
@@ -67,24 +52,6 @@ public class TwoSat {
         }
     }
 
-    private ArrayList<Integer> literalsIndexesFromComponents(ArrayList<Edge<Integer>> components) {
-
-        ArrayList<Integer> literalsIndexes = new ArrayList<>();
-
-        for (Edge<Integer> edge : components) {
-
-            if (edge != null) {
-                if (!literalsIndexes.contains(edge.getSource())) {
-                    literalsIndexes.add(edge.getSource());
-                }
-                if (!literalsIndexes.contains(edge.getDestination())) {
-                    literalsIndexes.add(edge.getDestination());
-                }
-            }
-        }
-        return literalsIndexes;
-    }
-
     private ArrayList<Integer> literalsFromLiteralsIndexes(ArrayList<Integer> literalsIndexes) {
 
         ArrayList<Integer> literals = new ArrayList<>();
@@ -103,7 +70,7 @@ public class TwoSat {
     private boolean containsOpposite(Integer literalToCompare, ArrayList<Integer> literals) {
 
         for (int literal : literals) {
-            if (-literalToCompare == -literal) { return true; }
+            if (literalToCompare == -literal) { return true; }
         }
         return false;
     }

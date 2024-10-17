@@ -6,7 +6,7 @@ import static java.lang.System.exit;
 public class Main {
 
     public static void main(String[] args) {
-        String filename = "formulas/testSet1/formula2.txt";
+        String filename = "formulas/formula.txt";
         if (args.length > 0) {
             filename = args[0];
         }
@@ -14,6 +14,7 @@ public class Main {
         Parser graphParser = new Parser();
         ImplicationGraph implicationGraph = graphParser.buildImplicationGraph(filename);
         System.out.println(implicationGraph);
+        System.out.println(implicationGraph.mirror());
 
         ArrayList<Edge<Integer>> components = Kosaraju.process(implicationGraph);
         System.out.println(components);
