@@ -10,6 +10,13 @@ public class Edge<Label> {
         this.label = label;
     }
 
+    public String print(ImplicationGraph implicationGraph) {
+       return "[" + getSource() + " -> " +  getDestination() + "]"
+               + ", "
+               + "[" + implicationGraph.getLiteral(getSource()) + " -> " + implicationGraph.getLiteral(getDestination()) + "]"
+               + ", label : " + getLabel().toString();
+    }
+
     public int getSource() {
         return source;
     }

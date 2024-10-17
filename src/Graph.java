@@ -22,18 +22,18 @@ public class Graph<Label>  {
     @Override
     public String toString() {
         String result = "";
-        result = result.concat("\nNombre sommets : "+ getCardinal() + "\n\n");
-        result = result.concat("Sommets : ");
+        result = result.concat("\nVERTICES NUMBER : "+ getCardinal() + "\n\n");
+        result = result.concat("Vertices : ");
 
         for (int i = 0; i<getCardinal(); i++) {
             result = result.concat(i + " ");
         }
 
-        result = result.concat("\n\nArcs : \n");
+        result = result.concat("\n\nEDGES : \n");
 
         for (int i = 0; i<getCardinal(); i++) {
             for (Edge<Label> e : getEdges(i)) {
-                result = result.concat(e.getSource() + " -> " + e.getDestination() + ", étiquette : "
+                result = result.concat(e.getSource() + " -> " + e.getDestination() + ", label : "
                         + e.getLabel().toString() + "\n");
             }
         }
@@ -50,7 +50,7 @@ public class Graph<Label>  {
      */
     public void addEdge(int source, int destination, Label label) throws Exception {
 	    if (Math.max(source,destination) >= this.cardinal) {
-	        throw new Exception("Sommets trop gros pour la taille du graphe");
+	        throw new Exception("Vertices value to high for the graph size.");
 	    }
         incidence.get(source).addLast(new Edge<>(source,destination,label));
     }

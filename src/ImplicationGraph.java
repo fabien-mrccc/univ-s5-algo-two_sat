@@ -7,18 +7,18 @@ public class ImplicationGraph extends Graph<Integer> {
     @Override
     public String toString() {
         String result = "";
-        result = result.concat("\nNombre sommets : "+ getCardinal() + "\n\n");
-        result = result.concat("Littéral/Index : ");
+        result = result.concat("\nVERTICES NUMBER: "+ getCardinal() + "\n\n");
+        result = result.concat("Literal/Index: ");
 
         for (int i = 0; i<getCardinal(); i++) {
             result = result.concat(getLiteral(i) + "/" + i + " ");
         }
 
-        result = result.concat("\n\nArcs : \n");
+        result = result.concat("\n\nEDGES: [index -> index], [literal -> literal]\n");
 
         for (int i = 0; i < getCardinal(); i++) {
-            for (Edge<Integer> e : getEdges(i)) {
-                result = result.concat(getLiteral(e.getSource()) + " -> " + getLiteral(e.getDestination()) + ", étiquette : " + e.getLabel().toString() + "\n");
+            for (Edge<Integer> edge : getEdges(i)) {
+                result = result.concat(edge.print(this) + "\n");
             }
         }
         return result;
