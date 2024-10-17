@@ -15,17 +15,22 @@ public class Main {
         ImplicationGraph implicationGraph = graphParser.buildImplicationGraph(filename);
         System.out.println(implicationGraph);
 
-        ArrayList<Graph<Integer>.Edge> components = Kosaraju.process(implicationGraph);
+        ArrayList<Edge<Integer>> components = Kosaraju.process(implicationGraph);
         System.out.println(components);
+
+        for (Edge<Integer> edge : components) {
+            if (edge != null)
+                System.out.println(edge.getSource() + " " + edge.getDestination());
+        }
 
         if (TwoSat.checkConsistency(components)) {
             System.out.println("Formula " + filename + ": satisfiable");
             exit(0);
-        } else {
+        }
+        else {
             System.out.println("Formula " + filename + ": unsatisfiable");
             exit(-1);
         }
-
         exit(0);
     }
 }

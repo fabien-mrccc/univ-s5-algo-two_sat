@@ -5,7 +5,7 @@ public class Search {
 
     private final Graph<Integer> graph;
 
-    private final ArrayList<Graph<Integer>.Edge> predecessors;
+    private final ArrayList<Edge<Integer>> predecessors;
     private final ArrayList<Integer> visitedIndex;
     private final ArrayList<Integer> entryTime;
     private final ArrayList<Integer> iterationTime;
@@ -41,11 +41,14 @@ public class Search {
     /**
      * Performs an iterative depth-first search (DFS) on the graph, marking visited indexes
      * and recording their predecessors, and returns the predecessor list.
-     * @return the predecessor list.
+     *
+     * @param indexes a list of indexes representing the order in which the traversal should be executed.
+     *                Each index corresponds to a vertex in the graph that will be explored in the given order.
+     * @return the predecessor list, which contains the predecessors of each visited vertex.
      */
-    public ArrayList<Graph<Integer>.Edge> iterativeDFS(ArrayList<Integer> indexes) {
+    public ArrayList<Edge<Integer>> iterativeDFS(ArrayList<Integer> indexes) {
 
-        for (int index : indexes) {
+        for (Integer index : indexes) {
             explore(index, null, incrementCurrentIteration());
         }
         return getPredecessors();
@@ -63,7 +66,7 @@ public class Search {
      * @param predecessor    The predecessor leading to the current vertex.
      * @param iterationTime  The current iteration time for the exploration.
      */
-    private void explore(int index, Graph<Integer>.Edge predecessor, int iterationTime) {
+    private void explore(int index, Edge<Integer> predecessor, int iterationTime) {
 
         if (indexNotVisited(index)) {
             registerVisitedIndex(index);
@@ -71,8 +74,8 @@ public class Search {
             updateIterationTime(index, iterationTime);
             updatePredecessor(index, predecessor);
 
-            for (Graph<Integer>.Edge indexEdge : getGraph().getEdges(index)) {
-                explore(indexEdge.destination, indexEdge, getCurrentIteration());
+            for (Edge<Integer> indexEdge : getGraph().getEdges(index)) {
+                explore(indexEdge.getDestination(), indexEdge, getCurrentIteration());
             }
             updateExitTime(index);
         }
@@ -94,7 +97,7 @@ public class Search {
         getIterationTime().set(index, iterationTime);
     }
 
-    private void updatePredecessor(int index, Graph<Integer>.Edge edge) {
+    private void updatePredecessor(int index, Edge<Integer> edge) {
         getPredecessors().set(index, edge);
     }
 
@@ -122,7 +125,7 @@ public class Search {
         return graph;
     }
 
-    private ArrayList<Graph<Integer>.Edge> getPredecessors() {
+    private ArrayList<Edge<Integer>> getPredecessors() {
         return predecessors;
     }
 

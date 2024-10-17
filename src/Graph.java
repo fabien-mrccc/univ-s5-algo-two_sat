@@ -3,20 +3,8 @@ import java.util.LinkedList;
 
 public class Graph<Label>  {
 
-    public class Edge {
-        public int source;
-        public int destination;
-        public Label label;
-
-        public Edge(int from, int to, Label label) {
-            this.source = from;
-            this.destination = to;
-            this.label = label;
-        }
-    }
-
     private final int cardinal;
-    private final ArrayList<LinkedList<Edge>> incidence;
+    private final ArrayList<LinkedList<Edge<Label>>> incidence;
 
     /**
      * Initializes a graph with the specified number of nodes.
@@ -44,9 +32,9 @@ public class Graph<Label>  {
         result = result.concat("\n\nArcs : \n");
 
         for (int i = 0; i<getCardinal(); i++) {
-            for (Edge e : getEdges(i)) {
-                result = result.concat(e.source + " -> " + e.destination + ", étiquette : "
-                        + e.label.toString() + "\n");
+            for (Edge<Label> e : getEdges(i)) {
+                result = result.concat(e.getSource() + " -> " + e.getDestination() + ", étiquette : "
+                        + e.getLabel().toString() + "\n");
             }
         }
         return result;
@@ -64,10 +52,10 @@ public class Graph<Label>  {
 	    if (Math.max(source,destination) >= this.cardinal) {
 	        throw new Exception("Sommets trop gros pour la taille du graphe");
 	    }
-        incidence.get(source).addLast(new Edge(source,destination,label));
+        incidence.get(source).addLast(new Edge<>(source,destination,label));
     }
 
-    protected LinkedList<Edge> getEdges(int index) {
+    protected LinkedList<Edge<Label>> getEdges(int index) {
         return incidence.get(index);
     }
 
