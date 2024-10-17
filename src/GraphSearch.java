@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-public class IterativeDFSearch {
+public class GraphSearch<Label> {
 
-    private final Graph<Integer> graph;
+    private final Graph<Label> graph;
 
-    private final ArrayList<Edge<Integer>> predecessors;
+    private final ArrayList<Edge<Label>> predecessors;
     private final ArrayList<Integer> visitedIndex;
     private final ArrayList<Integer> entryTime;
     private final ArrayList<Integer> iterationTime;
@@ -13,7 +13,7 @@ public class IterativeDFSearch {
     private int currentTime;
     private int currentIteration;
 
-    public IterativeDFSearch(Graph<Integer> graph) {
+    public GraphSearch(Graph<Label> graph) {
         this.graph = graph;
         this.predecessors = new ArrayList<>();
         this.visitedIndex = new ArrayList<>();
@@ -46,7 +46,7 @@ public class IterativeDFSearch {
      *                Each index corresponds to a vertex in the graph that will be explored in the given order.
      * @return the predecessor list, which contains the predecessors of each visited vertex.
      */
-    public ArrayList<Edge<Integer>> iterativeDFS(ArrayList<Integer> indexes) {
+    public ArrayList<Edge<Label>> iterativeDFS(ArrayList<Integer> indexes) {
 
         for (Integer index : indexes) {
             explore(index, null, incrementCurrentIteration());
@@ -66,7 +66,7 @@ public class IterativeDFSearch {
      * @param predecessor    The predecessor leading to the current vertex.
      * @param iterationTime  The current iteration time for the exploration.
      */
-    private void explore(int index, Edge<Integer> predecessor, int iterationTime) {
+    private void explore(int index, Edge<Label> predecessor, int iterationTime) {
 
         if (indexNotVisited(index)) {
             registerVisitedIndex(index);
@@ -74,7 +74,7 @@ public class IterativeDFSearch {
             updateIterationTime(index, iterationTime);
             updatePredecessor(index, predecessor);
 
-            for (Edge<Integer> indexEdge : getGraph().getEdges(index)) {
+            for (Edge<Label> indexEdge : getGraph().getEdges(index)) {
                 explore(indexEdge.getDestination(), indexEdge, getCurrentIteration());
             }
             updateExitTime(index);
@@ -97,7 +97,7 @@ public class IterativeDFSearch {
         getIterationTime().set(index, iterationTime);
     }
 
-    private void updatePredecessor(int index, Edge<Integer> edge) {
+    private void updatePredecessor(int index, Edge<Label> edge) {
         getPredecessors().set(index, edge);
     }
 
@@ -121,11 +121,11 @@ public class IterativeDFSearch {
         return currentIteration;
     }
 
-    private Graph<Integer> getGraph() {
+    private Graph<Label> getGraph() {
         return graph;
     }
 
-    private ArrayList<Edge<Integer>> getPredecessors() {
+    private ArrayList<Edge<Label>> getPredecessors() {
         return predecessors;
     }
 

@@ -12,9 +12,9 @@ public class Kosaraju {
     public static ArrayList<Edge<Integer>> process(ImplicationGraph originalGraph) {
 
         Graph<Integer> mirror = originalGraph.mirror();
-        IterativeDFSearch originalGraphSearch = new IterativeDFSearch(originalGraph);
+        GraphSearch<Integer> originalGraphSearch = new GraphSearch<>(originalGraph);
         ArrayList<Integer> sortedIndexesByExitTime;
-        IterativeDFSearch mirrorGraphSearch = new IterativeDFSearch(mirror);
+        GraphSearch<Integer> mirrorGraphSearch = new GraphSearch<>(mirror);
 
         originalGraphSearch.iterativeDFS(originalGraph.getIndexes());
         sortedIndexesByExitTime = sortIndexesByExitTimeDescending(originalGraphSearch.getExitTime());
