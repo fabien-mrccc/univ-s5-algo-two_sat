@@ -24,12 +24,19 @@ public class TwoSat {
 
         ComponentsSearch componentsSearch = new ComponentsSearch(this);
 
+        System.out.println("IDENTIFIED COMPONENTS:");
+
         for (ArrayList<Integer> component : componentsSearch.identifyComponents()) {
+
+            System.out.println(literalsFromLiteralsIndexes(component));
 
             HashSet<Integer> literals = literalsFromLiteralsIndexes(component);
 
             for (Integer literal : literals) {
-                if (containsOpposite(literal, literals)) { return false; }
+                if (containsOpposite(literal, literals)) {
+                    System.out.println("_!_ literal with opposite: " + literal);
+                    return false;
+                }
             }
         }
         return true;
