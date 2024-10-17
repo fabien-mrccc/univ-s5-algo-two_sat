@@ -6,7 +6,7 @@ import static java.lang.System.exit;
 public class Main {
 
     public static void main(String[] args) {
-        String filename = "formulas/formula.txt";
+        String filename = "formulas/testSet1/formula9.txt";
         if (args.length > 0) {
             filename = args[0];
         }
@@ -24,9 +24,9 @@ public class Main {
                 System.out.println("component edge - " + edge.getSource() + " " + edge.getDestination());
         }
 
-        TwoSat twoSat = new TwoSat(implicationGraph);
+        TwoSat twoSat = new TwoSat(implicationGraph, components);
 
-        if (twoSat.checkConsistency(components)) {
+        if (twoSat.checkConsistency()) {
             System.out.println("Formula " + filename + ": satisfiable");
             exit(0);
         }

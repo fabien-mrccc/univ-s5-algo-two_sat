@@ -1,73 +1,42 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class TwoSat {
 
     private final ImplicationGraph implicationGraph;
+    private final ArrayList<Edge<Integer>> unidentifiedComponents;
 
-    public TwoSat(ImplicationGraph implicationGraph) {
+    public TwoSat(ImplicationGraph implicationGraph, ArrayList<Edge<Integer>> unidentifiedComponents) {
         this.implicationGraph = implicationGraph;
+        this.unidentifiedComponents = unidentifiedComponents;
     }
 
-    //TODO ... traiter chaque component séparément
-    public boolean checkConsistency(ArrayList<Edge<Integer>> components) {
+    public boolean checkConsistency() {
 
-        for (ArrayList<Integer> component : findComponents(components)) {
-            ArrayList<Integer> literals = literalsFromLiteralsIndexes(component);
-            for(Integer literal : literals){
+        ComponentsSearch componentsSearch = new ComponentsSearch(this);
+
+        for (ArrayList<Integer> component : componentsSearch.identifyComponents()) {
+
+            HashSet<Integer> literals = literalsFromLiteralsIndexes(component);
+
+            for (Integer literal : literals) {
                 if (containsOpposite(literal, literals)) { return false; }
             }
         }
         return true;
-
     }
 
-    public static ArrayList<ArrayList<Integer>> findComponents(ArrayList<Edge<Integer>> predecessors) {
-        ArrayList<ArrayList<Integer>> connectedComponents = new ArrayList<>();
-        boolean[] visited = new boolean[predecessors.size()];
+    private HashSet<Integer> literalsFromLiteralsIndexes(ArrayList<Integer> literalsIndexes) {
 
-        for (int i = 0; i < predecessors.size() ; i++) {
-            if (!visited[i]) {
-                ArrayList<Integer> component = new ArrayList<>();
-                dfs(i, predecessors, visited, component);
-                connectedComponents.add(component);
-            }
-        }
-        System.out.println("components: "+ connectedComponents);
-        return connectedComponents;
-    }
-
-    private static void dfs(int node, ArrayList<Edge<Integer>> predecessors, boolean[] visited, ArrayList<Integer> component) {
-        visited[node] = true;
-        component.add(node);
-
-        for (Edge edge : predecessors) {
-            if (edge != null) {
-                if (edge.getSource() == node && !visited[edge.getDestination()]) {
-                    dfs(edge.getDestination(), predecessors, visited, component);
-                }
-                if (edge.getDestination() == node && !visited[edge.getSource()]) {
-                    dfs(edge.getSource(), predecessors, visited, component);
-                }
-            }
-        }
-    }
-
-    private ArrayList<Integer> literalsFromLiteralsIndexes(ArrayList<Integer> literalsIndexes) {
-
-        ArrayList<Integer> literals = new ArrayList<>();
+        HashSet<Integer> literals = new HashSet<>();
 
         for (int literalIndex : literalsIndexes) {
-
-            Integer literal = getImplicationGraph().getLiteral(literalIndex);
-
-            if (!literals.contains(literal)) {
-                literals.add(literal);
-            }
+            literals.add(getImplicationGraph().getLiteral(literalIndex));
         }
         return literals;
     }
 
-    private boolean containsOpposite(Integer literalToCompare, ArrayList<Integer> literals) {
+    private boolean containsOpposite(Integer literalToCompare, HashSet<Integer> literals) {
 
         for (int literal : literals) {
             if (literalToCompare == -literal) { return true; }
@@ -77,5 +46,9 @@ public class TwoSat {
 
     private ImplicationGraph getImplicationGraph() {
         return implicationGraph;
+    }
+
+    public ArrayList<Edge<Integer>> getUnidentifiedComponents() {
+        return unidentifiedComponents;
     }
 }
