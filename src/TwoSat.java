@@ -11,17 +11,20 @@ public class TwoSat {
     //TODO ... traiter chaque component séparément
     public boolean checkConsistency(ArrayList<Edge<Integer>> components) {
 
-        /*
-        LinkedList<Integer> literalsIndexes = literalsIndexesFromComponents(components);
+        ArrayList<Integer> literalsIndexes = literalsIndexesFromComponents(components);
 
-        LinkedList<Integer> literals = literalsFromLiteralsIndexes(literalsIndexes);
+        while (!literalsIndexes.isEmpty()) {
+
+            Edge<Integer> edge = components.removeFirst();
+            // ...
+        }
+
+        ArrayList<Integer> literals = literalsFromLiteralsIndexes(literalsIndexes);
 
         for (int literal : literals) {
             if (containsOpposite(literal, literals)) { return false; }
         }
         return true;
-         */
-        return false;
     }
 
     private ArrayList<Integer> literalsIndexesFromComponents(ArrayList<Edge<Integer>> components) {
@@ -57,10 +60,10 @@ public class TwoSat {
         return literals;
     }
 
-    private boolean containsOpposite(Integer literal, ArrayList<Integer> literals) {
+    private boolean containsOpposite(Integer literalToCompare, ArrayList<Integer> literals) {
 
-        for (int literalToCompare : literals) {
-            if (literalToCompare == -literal) { return true; }
+        for (int literal : literals) {
+            if (-literalToCompare == -literal) { return true; }
         }
         return false;
     }
