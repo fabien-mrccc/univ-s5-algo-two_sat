@@ -63,8 +63,8 @@ public class Graph<Label>  {
         return cardinal;
     }
 
-    public LinkedList<Integer> getIndexes(){
-        LinkedList<Integer> indexes = new LinkedList<>();
+    public ArrayList<Integer> getIndexes(){
+        ArrayList<Integer> indexes = new ArrayList<>();
         for(int index = 0; index < cardinal; index++){
             indexes.add(index);
         }

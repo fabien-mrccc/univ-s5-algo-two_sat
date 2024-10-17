@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 import static java.lang.System.exit;
@@ -5,7 +6,7 @@ import static java.lang.System.exit;
 public class Main {
 
     public static void main(String[] args) {
-        String filename = "formulas/testSet0/formula3.txt";
+        String filename = "formulas/formula.txt";
         if (args.length > 0) {
             filename = args[0];
         }
@@ -14,7 +15,7 @@ public class Main {
         ImplicationGraph implicationGraph = graphParser.buildImplicationGraph(filename);
         System.out.println(implicationGraph);
 
-        LinkedList<Edge<Integer>> components = Kosaraju.process(implicationGraph);
+        ArrayList<Edge<Integer>> components = Kosaraju.process(implicationGraph);
         System.out.println(components);
 
         for (Edge<Integer> edge : components) {

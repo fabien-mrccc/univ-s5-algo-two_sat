@@ -1,25 +1,26 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Search {
 
     private final Graph<Integer> graph;
 
-    private final LinkedList<Edge<Integer>> predecessors;
-    private final LinkedList<Integer> visitedIndex;
-    private final LinkedList<Integer> entryTime;
-    private final LinkedList<Integer> iterationTime;
-    private final LinkedList<Integer> exitTime;
+    private final ArrayList<Edge<Integer>> predecessors;
+    private final ArrayList<Integer> visitedIndex;
+    private final ArrayList<Integer> entryTime;
+    private final ArrayList<Integer> iterationTime;
+    private final ArrayList<Integer> exitTime;
 
     private int currentTime;
     private int currentIteration;
 
     public Search(Graph<Integer> graph) {
         this.graph = graph;
-        this.predecessors = new LinkedList<>();
-        this.visitedIndex = new LinkedList<>();
-        this.entryTime = new LinkedList<>();
-        this.iterationTime = new LinkedList<>();
-        this.exitTime = new LinkedList<>();
+        this.predecessors = new ArrayList<>();
+        this.visitedIndex = new ArrayList<>();
+        this.entryTime = new ArrayList<>();
+        this.iterationTime = new ArrayList<>();
+        this.exitTime = new ArrayList<>();
         initLinkedListAttributesWithEmptyValues();
         this.currentTime = 0;
         this.currentIteration = 0;
@@ -45,7 +46,7 @@ public class Search {
      *                Each index corresponds to a vertex in the graph that will be explored in the given order.
      * @return the predecessor list, which contains the predecessors of each visited vertex.
      */
-    public LinkedList<Edge<Integer>> iterativeDFS(LinkedList<Integer> indexes) {
+    public ArrayList<Edge<Integer>> iterativeDFS(ArrayList<Integer> indexes) {
 
         for (Integer index : indexes) {
             explore(index, null, incrementCurrentIteration());
@@ -112,7 +113,7 @@ public class Search {
         return currentIteration++;
     }
 
-    public LinkedList<Integer> getExitTime() {
+    public ArrayList<Integer> getExitTime() {
         return exitTime;
     }
 
@@ -124,19 +125,19 @@ public class Search {
         return graph;
     }
 
-    private LinkedList<Edge<Integer>> getPredecessors() {
+    private ArrayList<Edge<Integer>> getPredecessors() {
         return predecessors;
     }
 
-    private LinkedList<Integer> getIterationTime() {
+    private ArrayList<Integer> getIterationTime() {
         return iterationTime;
     }
 
-    private LinkedList<Integer> getEntryTime() {
+    private ArrayList<Integer> getEntryTime() {
         return entryTime;
     }
 
-    private LinkedList<Integer> getVisitedIndex() {
+    private ArrayList<Integer> getVisitedIndex() {
         return visitedIndex;
     }
 }
