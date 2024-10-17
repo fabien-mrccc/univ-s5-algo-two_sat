@@ -8,13 +8,8 @@ public class TwoSat {
         this.implicationGraph = implicationGraph;
     }
 
+    //TODO ... traiter chaque component séparément
     public boolean checkConsistency(ArrayList<Edge<Integer>> components) {
-
-        ArrayList<ArrayList<ImplicationGraph>> componentsGraphs = componentsGraphs(components);
-
-        //for (ImplicationGraph component : componentsGraphs) {
-            //TODO ... inclure les commentaires ci-dessous dans cette boucle
-        //}
 
         /*
         LinkedList<Integer> literalsIndexes = literalsIndexesFromComponents(components);
@@ -27,11 +22,6 @@ public class TwoSat {
         return true;
          */
         return false;
-    }
-
-    //TODO ...
-    private ArrayList<ArrayList<ImplicationGraph>> componentsGraphs (ArrayList<Edge<Integer>> components) {
-        return null;
     }
 
     private ArrayList<Integer> literalsIndexesFromComponents(ArrayList<Edge<Integer>> components) {
