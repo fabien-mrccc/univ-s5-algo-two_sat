@@ -5,11 +5,11 @@ public class Parser {
 
     /**
      * Builds the implication graph related to the file given.
-     * @param filename the path of the file to read
+     * @param filePath the path of the file to read
      */
-    public static ImplicationGraph buildImplicationGraph(String filename) {
+    public static ImplicationGraph buildImplicationGraph(String filePath) {
 
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
             bufferedReader.readLine();
             String[] cardinalLine = bufferedReader.readLine().split(" ");
             int graphSize = 2 * Integer.parseInt(cardinalLine[2]);

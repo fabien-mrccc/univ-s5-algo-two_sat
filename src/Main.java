@@ -6,12 +6,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String filename = "formulas/testSet1/formula9.txt";
+        String filePath = "formulas/testSet1/formula9.txt";
         if (args.length > 0) {
-            filename = args[0];
+            filePath = args[0];
         }
 
-        ImplicationGraph implicationGraph = Parser.buildImplicationGraph(filename);
+        ImplicationGraph implicationGraph = Parser.buildImplicationGraph(filePath);
         System.out.println(implicationGraph);
         System.out.println(implicationGraph.mirror());
 
@@ -26,11 +26,11 @@ public class Main {
         TwoSat twoSat = new TwoSat(implicationGraph, components);
 
         if (twoSat.checkConsistency()) {
-            System.out.println("Formula " + filename + ": satisfiable");
+            System.out.println("Formula " + filePath + ": satisfiable");
             exit(0);
         }
         else {
-            System.out.println("Formula " + filename + ": unsatisfiable");
+            System.out.println("Formula " + filePath + ": unsatisfiable");
             exit(-1);
         }
     }

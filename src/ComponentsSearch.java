@@ -20,6 +20,12 @@ public class ComponentsSearch {
         }
     }
 
+    /**
+     * Identifies all strongly connected components in the graph using depth-first search (DFS).
+     *
+     * @return An ArrayList of components, where each component is represented as an ArrayList of indexes.
+     *
+     */
     public ArrayList<ArrayList<Integer>> identifyComponents() {
 
         for (int nodeIndex = 0; nodeIndex < getVisitedNodes().size() ; nodeIndex++) {
@@ -31,6 +37,14 @@ public class ComponentsSearch {
         }
         return getIdentifiedComponents();
     }
+
+    /**
+     * Performs a depth-first search (DFS) starting from the given node index to explore a
+     * strongly connected component iteratively.
+     *
+     * @param currentNodeIndex The index of the node from which to start the DFS.
+     *
+     */
 
     public void iterativeDFS(Integer currentNodeIndex) {
 
