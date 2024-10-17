@@ -20,10 +20,12 @@ public class Main {
 
         for (Edge<Integer> edge : components) {
             if (edge != null)
-                System.out.println(edge.getSource() + " " + edge.getDestination());
+                System.out.println("component edge - " + edge.getSource() + " " + edge.getDestination());
         }
 
-        if (TwoSat.checkConsistency(components)) {
+        TwoSat twoSat = new TwoSat(implicationGraph);
+
+        if (twoSat.checkConsistency(components)) {
             System.out.println("Formula " + filename + ": satisfiable");
             exit(0);
         }
@@ -31,6 +33,5 @@ public class Main {
             System.out.println("Formula " + filename + ": unsatisfiable");
             exit(-1);
         }
-        exit(0);
     }
 }

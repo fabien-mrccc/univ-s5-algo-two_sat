@@ -2,9 +2,14 @@ import java.util.ArrayList;
 
 public class TwoSat {
 
-    //TODO: utiliser getLiteral dans TwoSat et différencier les components pour l'évaluation de checkConsistency
+    private final ImplicationGraph implicationGraph;
 
-    public static boolean checkConsistency(ArrayList<Edge<Integer>> components) {
+    public TwoSat(ImplicationGraph implicationGraph) {
+        this.implicationGraph = implicationGraph;
+    }
+
+    //TODO ... traiter chaque component séparément
+    public boolean checkConsistency(ArrayList<Edge<Integer>> components) {
 
         for (ArrayList<Integer> component : findConnectedComponents(components)) {
             for(Integer literalIndex : component){
@@ -48,25 +53,48 @@ public class TwoSat {
         }
     }
 
-    private static ArrayList<Integer> componentLiteralsIndexes(ArrayList<Edge<Integer>> components){
-        ArrayList<Integer> componentLiteralsIndexes = new ArrayList<>();
-        for (Edge<Integer> edge: components) {
+    private ArrayList<Integer> literalsIndexesFromComponents(ArrayList<Edge<Integer>> components) {
+
+        ArrayList<Integer> literalsIndexes = new ArrayList<>();
+
+        for (Edge<Integer> edge : components) {
+
             if (edge != null) {
-                if (!componentLiteralsIndexes.contains(edge.getSource())) {
-                    componentLiteralsIndexes.add(edge.getSource());
+                if (!literalsIndexes.contains(edge.getSource())) {
+                    literalsIndexes.add(edge.getSource());
                 }
-                if (!componentLiteralsIndexes.contains(edge.getDestination())) {
-                    componentLiteralsIndexes.add(edge.getDestination());
+                if (!literalsIndexes.contains(edge.getDestination())) {
+                    literalsIndexes.add(edge.getDestination());
                 }
             }
         }
-        return componentLiteralsIndexes;
+        return literalsIndexes;
     }
 
-    private static boolean containsOpposite(ArrayList<Integer> literalsIndexes, int literalIndex){
-        for (int index : literalsIndexes) {
-            if (index == -literalIndex-1) {return true; }
+    private ArrayList<Integer> literalsFromLiteralsIndexes(ArrayList<Integer> literalsIndexes) {
+
+        ArrayList<Integer> literals = new ArrayList<>();
+
+        for (int literalIndex : literalsIndexes) {
+
+            Integer literal = getImplicationGraph().getLiteral(literalIndex);
+
+            if (!literals.contains(literal)) {
+                literals.add(literal);
+            }
+        }
+        return literals;
+    }
+
+    private boolean containsOpposite(Integer literal, ArrayList<Integer> literals) {
+
+        for (int literalToCompare : literals) {
+            if (literalToCompare == -literal) { return true; }
         }
         return false;
+    }
+
+    private ImplicationGraph getImplicationGraph() {
+        return implicationGraph;
     }
 }
