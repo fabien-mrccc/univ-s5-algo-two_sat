@@ -46,7 +46,7 @@ Pour résoudre le problème 2-SAT, nous avons utilisé des ArrayList pour les so
 
 - **ArrayList :** Accès O(1) pour les sommets et les composantes, et ajout O(1), adapté aux parcours des composantes fortement connexes.<br>
 
-- **LinkedList :** Permet une insertion rapide O(1) lors de la construction du graphe, tout en étant efficace pour les parcours séquentiels.<br>
+- **LinkedList :** Permet une insertion rapide O(1) lors de la construction du graphe, tout en étant efficace pour les parcours séquentiels.<br><br>
 *Nous avons utilisé une structure ArrayList<LinkedList<Edge>> dans la classe Graph, où chaque sommet est associé à une LinkedList de ses arcs sortants. Cela combine l'efficacité d'accès d'une ArrayList avec la souplesse d'ajout d'une LinkedList.*<br>
 
 - **HashSet :** Évite les doublons pour stocker les littéraux dans la classe TwoSat.<br>
