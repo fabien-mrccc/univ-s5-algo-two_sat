@@ -1,12 +1,12 @@
 import java.util.ArrayList;
 
-public class ComponentsSearch {
+public class ComponentsIdentifier {
 
     private final TwoSat twoSat;
     private final ArrayList<Boolean> visitedNodes;
     private final ArrayList<ArrayList<Integer>> identifiedComponents;
 
-    public ComponentsSearch(TwoSat twoSat) {
+    public ComponentsIdentifier(TwoSat twoSat) {
         this.twoSat = twoSat;
         this.visitedNodes = new ArrayList<>();
         initVisitedNodes();

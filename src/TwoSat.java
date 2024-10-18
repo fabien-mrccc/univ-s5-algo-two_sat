@@ -20,11 +20,11 @@ public class TwoSat {
      */
     public boolean checkConsistency() {
 
-        ComponentsSearch componentsSearch = new ComponentsSearch(this);
+        ComponentsIdentifier componentsIdentifier = new ComponentsIdentifier(this);
 
         System.out.println("IDENTIFIED COMPONENTS:");
 
-        for (ArrayList<Integer> component : componentsSearch.identifyComponents()) {
+        for (ArrayList<Integer> component : componentsIdentifier.identifyComponents()) {
 
             System.out.println(literalsFromLiteralsIndexes(component));
 
