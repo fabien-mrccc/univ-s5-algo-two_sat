@@ -20,21 +20,21 @@
 
 ### Description du rôle des classes
 
-- **ComponentsIdentifier :** Identifie les composantes fortement connexes d'un graphe dans des structures distinctes à l'aide d'une recherche en profondeur. <br><br>
+- **ComponentsIdentifier :** Identifie les composantes fortement connexes d'un graphe dans des structures distinctes à l'aide d'une recherche en profondeur. <br>
 
-- **Edge :** Représente un arc dans un graphe orienté.<br><br>
+- **Edge :** Représente un arc dans un graphe orienté.<br>
 
-- **Graph :** Représente un graphe orienté via une liste d'incidence, permettant l'ajout d'arêtes et la création d'un graphe miroir.<br><br>
+- **Graph :** Représente un graphe orienté via une liste d'incidence, permettant l'ajout d'arêtes et la création d'un graphe miroir.<br>
 
-- **GraphSearch :** Effectue une recherche en profondeur itérative sur un graphe orienté, enregistrant les prédécesseurs et les temps d'entrée/sortie des nœuds.<br><br>
+- **GraphSearch :** Effectue une recherche en profondeur itérative sur un graphe orienté, enregistrant les prédécesseurs et les temps d'entrée/sortie des nœuds.<br>
 
-- **ImplicationGraph :** Étend la classe Graph pour représenter les implications d'un problème 2-SAT, ajoutant des arêtes basées sur des clauses logiques et modélisant chaque littéral par un sommet.<br><br>
+- **ImplicationGraph :** Étend la classe Graph pour représenter les implications d'un problème 2-SAT, ajoutant des arêtes basées sur des clauses logiques et modélisant chaque littéral par un sommet.<br>
 
-- **Kosaraju :** Identifie les composantes fortement connexes d'un graphe des implications en utilisant l'algorithme de Kosaraju.<br><br>
+- **Kosaraju :** Identifie les composantes fortement connexes d'un graphe des implications en utilisant l'algorithme de Kosaraju.<br>
 
-- **Main :** Exécute l'algorithme 2-SAT en construisant le graphe des implications à partir d'une formule issue d'un fichier formaté, puis en identifiant les composantes fortement connexes et en vérifiant la satisfaisabilité de la formule.<br><br>
+- **Main :** Exécute l'algorithme 2-SAT en construisant le graphe des implications à partir d'une formule issue d'un fichier formaté, puis en identifiant les composantes fortement connexes et en vérifiant la satisfaisabilité de la formule.<br>
 
-- **Parser :** Construit le graphe des implications à partir d'une formule 2-SAT formatée dans un fichier spécifié.<br><br>
+- **Parser :** Construit le graphe des implications à partir d'une formule 2-SAT formatée dans un fichier spécifié.<br>
 
 - **TwoSat :** Vérifie la consistance d'un système 2-SAT en s'assurant qu'aucune composante ne contient un littéral et son opposé.
 
@@ -44,10 +44,10 @@
 ### 1. Structures de données choisies
 Pour résoudre le problème 2-SAT, nous avons utilisé des ArrayList pour les sommets et les composantes fortement connexes, tout en conservant des LinkedList dans la classe Graph pour les listes d'incidence, et des HashSet dans TwoSat pour les littéraux :<br>
 
-- **ArrayList :** Accès O(1) pour les sommets et les composantes, et ajout O(1), adapté aux parcours des composantes fortement connexes.<br><br>
+- **ArrayList :** Accès O(1) pour les sommets et les composantes, et ajout O(1), adapté aux parcours des composantes fortement connexes.<br>
 
-- **LinkedList :** Permet une insertion rapide O(1) lors de la construction du graphe, tout en étant efficace pour les parcours séquentiels.<br><br>
-*Nous avons utilisé une structure ArrayList<LinkedList<Edge>> dans la classe Graph, où chaque sommet est associé à une LinkedList de ses arcs sortants. Cela combine l'efficacité d'accès d'une ArrayList avec la souplesse d'ajout d'une LinkedList.*<br><br>
+- **LinkedList :** Permet une insertion rapide O(1) lors de la construction du graphe, tout en étant efficace pour les parcours séquentiels.<br>
+*Nous avons utilisé une structure ArrayList<LinkedList<Edge>> dans la classe Graph, où chaque sommet est associé à une LinkedList de ses arcs sortants. Cela combine l'efficacité d'accès d'une ArrayList avec la souplesse d'ajout d'une LinkedList.*<br>
 
 - **HashSet :** Évite les doublons pour stocker les littéraux dans la classe TwoSat.<br>
 
