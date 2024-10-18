@@ -64,7 +64,7 @@ L'algorithme implémenté fonctionne en plusieurs étapes, avec une logique bien
   - **Raison :** Utilisation incorrecte de la méthode bufferedReader.readLine(), entraînant le saut d'une ligne sur deux lors de la lecture du fichier.<br>
   - **Conséquences :** Erreur dans la construction des clauses et du graphe des implications, entraînant des résultats incohérents dans la suite de l'algorithme 2-SAT.<br>
   - **Solution :** Identification de l'erreur après plusieurs heures de recherche et correction du flux de lecture.<br>
-  - **Résultat :** La construction du graphe des implications fonctionne correctement ainsi que les algorithmes qui les utilisent.<br>
+  - **Résultat :** La construction du graphe des implications fonctionne correctement ainsi que les algorithmes qui les utilisent.<br><br>
 
 - #### Identification distincte des composantes fortement connexes issues de la classe Kosaraju.
   - **Raison :** La classe Kosaraju retourne une liste simple d'arcs ne permettant pas d'identifier quels arcs font partis d'une même composante fortement connexe.
