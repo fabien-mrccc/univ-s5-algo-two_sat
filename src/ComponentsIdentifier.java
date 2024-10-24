@@ -1,18 +1,21 @@
 import java.util.ArrayList;
 
-public class ComponentsSearch {
+public class ComponentsIdentifier {
 
     private final TwoSat twoSat;
     private final ArrayList<Boolean> visitedNodes;
     private final ArrayList<ArrayList<Integer>> identifiedComponents;
 
-    public ComponentsSearch(TwoSat twoSat) {
+    public ComponentsIdentifier(TwoSat twoSat) {
         this.twoSat = twoSat;
         this.visitedNodes = new ArrayList<>();
         initVisitedNodes();
         this.identifiedComponents = new ArrayList<>();
     }
 
+    /**
+     * Initializes the list of visited nodes, marking all as unvisited.
+     */
     private void initVisitedNodes() {
 
         for (int index = 0; index < getTwoSat().getUnidentifiedComponents().size(); index++) {
@@ -45,10 +48,9 @@ public class ComponentsSearch {
      * @param currentNodeIndex The index of the node from which to start the DFS.
      *
      */
-
     public void iterativeDFS(Integer currentNodeIndex) {
 
-        setVisitedNodes(currentNodeIndex, Boolean.TRUE);
+        setVisitedNodes(currentNodeIndex);
         getIdentifiedComponents().getLast().add(currentNodeIndex);
 
         for (Edge<Integer> edge : getTwoSat().getUnidentifiedComponents()) {
@@ -68,15 +70,15 @@ public class ComponentsSearch {
         return twoSat;
     }
 
-    public ArrayList<Boolean> getVisitedNodes() {
+    private ArrayList<Boolean> getVisitedNodes() {
         return visitedNodes;
     }
 
-    public void setVisitedNodes(int index, Boolean value) {
-        visitedNodes.set(index, value);
+    private void setVisitedNodes(int index) {
+        visitedNodes.set(index, Boolean.TRUE);
     }
 
-    public ArrayList<ArrayList<Integer>> getIdentifiedComponents() {
+    private ArrayList<ArrayList<Integer>> getIdentifiedComponents() {
         return identifiedComponents;
     }
 }

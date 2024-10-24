@@ -9,7 +9,6 @@ public class Main {
         if (args.length > 0) {
             filePath = args[0];
         }
-
         System.out.println("\nFILEPATH: " + filePath);
 
         ImplicationGraph implicationGraph = Parser.buildImplicationGraph(filePath);
@@ -19,7 +18,8 @@ public class Main {
         printComponents(components, implicationGraph);
 
         TwoSat twoSat = new TwoSat(implicationGraph, components);
-        printSatisfiability(twoSat, filePath);
+        boolean isConsistent = twoSat.checkConsistency();
+        printSatisfiability(isConsistent, filePath);
     }
 
     private static void printComponents(ArrayList<Edge<Integer>> components, ImplicationGraph implicationGraph) {
@@ -31,17 +31,16 @@ public class Main {
         System.out.println();
     }
     
-    private static void printSatisfiability(TwoSat twoSat, String filePath) {
+    private static void printSatisfiability(boolean isConsistent, String filePath) {
 
-        boolean isConsistent = twoSat.checkConsistency();
         System.out.println("\nSATISFIABILITY: ");
 
         if (isConsistent) {
-            System.out.println("Formula " + filePath + ": satisfiable");
+            System.out.println("Formula " + filePath + ": SATISFIABLE");
             exit(0);
         }
         else {
-            System.out.println("Formula " + filePath + ": unsatisfiable");
+            System.out.println("Formula " + filePath + ": NOT SATISFIABLE");
             exit(-1);
         }
     }

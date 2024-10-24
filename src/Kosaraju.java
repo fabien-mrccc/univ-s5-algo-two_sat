@@ -10,10 +10,11 @@ public class Kosaraju {
      * @return A linked list of edges resulting from the depth-first search on the mirrored graph.
      */
     public static ArrayList<Edge<Integer>> process(ImplicationGraph originalGraph) {
-        ImplicationGraph mirror = originalGraph.mirror();
-        Search originalGraphSearch = new Search(originalGraph);
+
+        Graph<Integer> mirror = originalGraph.mirror();
+        GraphSearch<Integer> originalGraphSearch = new GraphSearch<>(originalGraph);
         ArrayList<Integer> sortedIndexesByExitTime;
-        Search mirrorGraphSearch = new Search(mirror);
+        GraphSearch<Integer> mirrorGraphSearch = new GraphSearch<>(mirror);
 
         originalGraphSearch.iterativeDFS(originalGraph.getIndexes());
         sortedIndexesByExitTime = sortIndexesByExitTimeDescending(originalGraphSearch.getExitTime());

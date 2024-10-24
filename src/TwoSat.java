@@ -17,16 +17,14 @@ public class TwoSat {
      *
      * @return true if the system is consistent (no literal and its opposite appear in the same component),
      *         otherwise false.
-     *
      */
-
     public boolean checkConsistency() {
 
-        ComponentsSearch componentsSearch = new ComponentsSearch(this);
+        ComponentsIdentifier componentsIdentifier = new ComponentsIdentifier(this);
 
         System.out.println("IDENTIFIED COMPONENTS:");
 
-        for (ArrayList<Integer> component : componentsSearch.identifyComponents()) {
+        for (ArrayList<Integer> component : componentsIdentifier.identifyComponents()) {
 
             System.out.println(literalsFromLiteralsIndexes(component));
 
@@ -52,7 +50,6 @@ public class TwoSat {
      * @return A HashSet of literals corresponding to the provided indexes.
      *
      */
-
     private HashSet<Integer> literalsFromLiteralsIndexes(ArrayList<Integer> literalsIndexes) {
 
         HashSet<Integer> literals = new HashSet<>();
@@ -71,7 +68,6 @@ public class TwoSat {
      * @return true if the set contains the opposite of the given literal, otherwise false.
      *
      */
-
     private boolean containsOpposite(Integer literalToCompare, HashSet<Integer> literals) {
 
         for (int literal : literals) {
