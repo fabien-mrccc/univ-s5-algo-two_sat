@@ -1,80 +1,77 @@
-# Problème 2-SAT
+# 2-SAT Problem
 
-## Informations utiles
-- Membres du projet : FANANI Amina, MARCUCCINI Fabien 
-- Chargé de TP : ROLLAND Marius
-- Matière : "Algorithmique 2" en troisième année de licence informatique à l'université d'Aix-Marseille
-- Version du SDK : openjdk-22 | Amazon Corretto 22.0.2 - aarch64
+## Useful Information
+- Project Members: FANANI Amina, MARCUCCINI Fabien 
+- Lab Supervisor: ROLLAND Marius
+- Subject: "Algorithms 2" in the third year of Computer Science at Aix-Marseille University
+- SDK Version: openjdk-22 | Amazon Corretto 22.0.2 - aarch64
 
+## PART 1: README
 
-## PARTIE 1 : README
+### Project Objective
+- The project statement is provided in the file **/pdf/tp1.pdf** *(french version)*. <br>
+- The general goal is to automate the satisfiability checking of propositional formulas with clauses of length 2 *(see technical term definitions in the statement)*.
 
-### But du projet
-- L'énoncé du projet est fourni dans le fichier **/pdf/tp1.pdf**. <br>
-- L'objectif général est d'automatiser la vérification de satisfaisabilité de formules propositionnelles avec des clauses de longueur 2 *(voir définition des termes techniques dans l'énoncé)*.
+### Command Line to Use the Project
+- The command line to execute the project code in the terminal is as follows:<br>
+**java -jar out/artifacts/2SAT/2SAT.jar <file_path_formula>**<br>
+- Example of use: *java -jar out/artifacts/2SAT/2SAT.jar formulas/formula.txt*<br>
 
-### Ligne de commande pour utiliser le projet
-- La ligne de commande qui permet d'exécuter le code du projet dans le terminal est la suivante :<br>
-**java -jar out/artifacts/2SAT/2SAT.jar <chemin_fichier_formule>**<br>
-- Exemple d'utilisation : *java -jar out/artifacts/2SAT/2SAT.jar formulas/formula.txt*<br>
+### Description of Class Roles
 
-### Description du rôle des classes
+- **ComponentsIdentifier:** Identifies strongly connected components of a graph in separate structures using depth-first search.<br>
 
-- **ComponentsIdentifier :** Identifie les composantes fortement connexes d'un graphe dans des structures distinctes à l'aide d'une recherche en profondeur. <br>
+- **Edge:** Represents an edge in a directed graph.<br>
 
-- **Edge :** Représente un arc dans un graphe orienté.<br>
+- **Graph:** Represents a directed graph via an incidence list, allowing the addition of edges and the creation of a mirror graph.<br>
 
-- **Graph :** Représente un graphe orienté via une liste d'incidence, permettant l'ajout d'arêtes et la création d'un graphe miroir.<br>
+- **GraphSearch:** Performs iterative depth-first search on a directed graph, recording predecessors and entry/exit times of nodes.<br>
 
-- **GraphSearch :** Effectue une recherche en profondeur itérative sur un graphe orienté, enregistrant les prédécesseurs et les temps d'entrée/sortie des nœuds.<br>
+- **ImplicationGraph:** Extends the Graph class to represent the implications of a 2-SAT problem, adding edges based on logical clauses and modeling each literal as a vertex.<br>
 
-- **ImplicationGraph :** Étend la classe Graph pour représenter les implications d'un problème 2-SAT, ajoutant des arêtes basées sur des clauses logiques et modélisant chaque littéral par un sommet.<br>
+- **Kosaraju:** Identifies strongly connected components of an implication graph using Kosaraju's algorithm.<br>
 
-- **Kosaraju :** Identifie les composantes fortement connexes d'un graphe des implications en utilisant l'algorithme de Kosaraju.<br>
+- **Main:** Executes the 2-SAT algorithm by constructing the implication graph from a formula in a formatted file, then identifying strongly connected components and checking the satisfiability of the formula.<br>
 
-- **Main :** Exécute l'algorithme 2-SAT en construisant le graphe des implications à partir d'une formule issue d'un fichier formaté, puis en identifiant les composantes fortement connexes et en vérifiant la satisfaisabilité de la formule.<br>
+- **Parser:** Constructs the implication graph from a formatted 2-SAT formula specified in a file.<br>
 
-- **Parser :** Construit le graphe des implications à partir d'une formule 2-SAT formatée dans un fichier spécifié.<br>
+- **TwoSat:** Checks the consistency of a 2-SAT system by ensuring that no component contains both a literal and its negation.
 
-- **TwoSat :** Vérifie la consistance d'un système 2-SAT en s'assurant qu'aucune composante ne contient un littéral et son opposé.
+## PART 2: REPORT
 
+### 1. Chosen Data Structures
+To solve the 2-SAT problem, we used ArrayLists for vertices and strongly connected components, while maintaining LinkedLists in the Graph class for incidence lists, and HashSets in TwoSat for literals:<br>
 
-## PARTIE 2 : RAPPORT
+- **ArrayList:** O(1) access for vertices and components, and O(1) addition, suitable for traversing strongly connected components.<br>
 
-### 1. Structures de données choisies
-Pour résoudre le problème 2-SAT, nous avons utilisé des ArrayList pour les sommets et les composantes fortement connexes, tout en conservant des LinkedList dans la classe Graph pour les listes d'incidence, et des HashSet dans TwoSat pour les littéraux :<br>
+- **LinkedList:** Allows quick O(1) insertion when constructing the graph, while being efficient for sequential traversals.<br><br>
+*We used an ArrayList<LinkedList<Edge>> structure in the Graph class, where each vertex is associated with a LinkedList of its outgoing edges. This combines the access efficiency of an ArrayList with the flexibility of adding a LinkedList.*<br>
 
-- **ArrayList :** Accès O(1) pour les sommets et les composantes, et ajout O(1), adapté aux parcours des composantes fortement connexes.<br>
+- **HashSet:** Avoids duplicates when storing literals in the TwoSat class.<br>
 
-- **LinkedList :** Permet une insertion rapide O(1) lors de la construction du graphe, tout en étant efficace pour les parcours séquentiels.<br><br>
-*Nous avons utilisé une structure ArrayList<LinkedList<Edge>> dans la classe Graph, où chaque sommet est associé à une LinkedList de ses arcs sortants. Cela combine l'efficacité d'accès d'une ArrayList avec la souplesse d'ajout d'une LinkedList.*<br>
+### 2. Proof of Functionality of the Solution
+The implemented algorithm works in several steps, with sound logic based on graph theory and the structure of the 2-SAT problem:<br>
+1. **Construction of the Implication Graph:** Transformation of each clause l1∨l2 into two implications ¬l1⇒l2 and ¬l2⇒l1, modeling the logical dependencies of the formula to be processed.<br><br>
+2. **Application of Kosaraju's Algorithm:** Identification of edges belonging to strongly connected components in the implication graph via an initial depth-first search of the graph, followed by a second traversal on the transposed graph respecting the exit times from the first traversal.<br><br>
+3. **Grouping Edges of Strongly Connected Components:** Depth-first traversal of the list of edges identified by Kosaraju to distinctly reconstruct the subgraphs representing the strongly connected components.<br><br>
+4. **Satisfiability Check:** Analysis of the presence of strongly connected components containing both a literal and its negation, indicating the formula's unsatisfiability *(a literal cannot imply its negation)*; otherwise, the formula is satisfiable.<br>
 
-- **HashSet :** Évite les doublons pour stocker les littéraux dans la classe TwoSat.<br>
+### 3. Problems Encountered
 
-### 2. Preuve du fonctionnement de la solution
-L'algorithme implémenté fonctionne en plusieurs étapes, avec une logique bien fondée sur la théorie des graphes et la structure du problème 2-SAT :<br>
-1. **Construction du graphe des implications :** Transformation de chaque clause l1∨l2 en deux implications ¬l1⇒l2 et ¬l2⇒l1, modélisant les dépendances logiques de la formule à traiter.<br><br>
-2. **Application de l'algorithme de Kosaraju :** Identification des arcs faisant partis de composantes fortement connexes dans le graphe des implications via une première exploration en profondeur du graphe, suivi d'un deuxième parcours sur la transposée respectant l'ordre des temps de sortie du premier parcours.<br><br>
-3. **Regroupement des arcs des composantes fortement connexes :** Parcours en profondeur de la liste des arcs identifiés par Kosaraju afin de reconstruire distinctement les sous-graphes  représentant les composantes fortements connexes.<br><br>
-4. **Vérification de la satisfaisabilité :** Analyse de la présence de composantes fortement connexes avec un littéral et son opposé indiquant ainsi une insatisfaisabilité de la formule *(un littéral ne peut impliquer son opposé)*, sinon la formule est satisfaisable.<br>
+- #### Reading Clauses from 2-SAT Formulas in the Parser Class.
+  - **Reason:** Incorrect use of the method bufferedReader.readLine(), causing the skipping of every other line when reading the file.<br>
+  - **Consequences:** Error in the construction of clauses and the implication graph, leading to inconsistent results in the 2-SAT algorithm.<br>
+  - **Solution:** Identification of the error after several hours of investigation and correction of the reading flow.<br>
+  - **Result:** The construction of the implication graph now works correctly, as do the algorithms that use it.<br><br>
 
-### 3. Problèmes rencontrés
+- #### Distinct Identification of Strongly Connected Components from the Kosaraju Class.
+  - **Reason:** The Kosaraju class returns a simple list of edges, making it impossible to identify which edges belong to the same strongly connected component.
+  - **Consequence:** Difficulty in reusing the graph traversal algorithm, as we cannot reconstruct Graph objects with just a list of arbitrary edges.
+  - **Solution:** Writing a new class, ComponentsIdentifier, that considers the specific traversal needed to identify different strongly connected components.
+  - **Result:** Use of an ArrayList<ArrayList<Integer>> structure allowing for distinct grouping between each literal belonging to the same strongly connected component.
 
-- #### Lecture des clauses des formules 2-SAT dans la classe Parser.
-  - **Raison :** Utilisation incorrecte de la méthode bufferedReader.readLine(), entraînant le saut d'une ligne sur deux lors de la lecture du fichier.<br>
-  - **Conséquences :** Erreur dans la construction des clauses et du graphe des implications, entraînant des résultats incohérents dans la suite de l'algorithme 2-SAT.<br>
-  - **Solution :** Identification de l'erreur après plusieurs heures de recherche et correction du flux de lecture.<br>
-  - **Résultat :** La construction du graphe des implications fonctionne correctement ainsi que les algorithmes qui les utilisent.<br><br>
-
-- #### Identification distincte des composantes fortement connexes issues de la classe Kosaraju.
-  - **Raison :** La classe Kosaraju retourne une liste simple d'arcs ne permettant pas d'identifier quels arcs font partis d'une même composante fortement connexe.
-  - **Conséquence :** Difficulté à réutiliser l'algorithme de parcours de graphe car on ne peut reconstruire des objets Graph avec uniquement une liste d'arcs quelconques.
-  - **Solution :** Écriture d'une nouvelle classe ComponentsIdentifier qui prend en compte les spécifités du parcours nécessaire à l'identification des différentes composantes fortement connexes.
-  - **Résultat :** Utilisation d'une structure ArrayList<ArrayList<Integer'>> permettant des regroupements distincts entre chaque littéral appartenant à la même composante fortement connexe.
-
-### 4. Étude de complexité
-* **Algorithme :** Résolution du problème 2-SAT avec l'algorithme de Kosaraju.<br>
-* **Complexité :** Linéaire, O(n+m), où n est le nombre de sommets et m le nombre d'arcs.<br>
-* **Étapes :** Construction du graphe des implications en O(m), premier DFS en O(n+m), construction du graphe miroir en O(n+m) et le deuxième DFS réalisé sur le graphe miroir, également en O(n+m).<br>
-* **Résultat :** La complexité globale de l'algorithme est linéaire en fonction du nombre de clauses.<br>
-
+### 4. Complexity Study
+* **Algorithm:** Solving the 2-SAT problem with Kosaraju's algorithm.<br>
+* **Complexity:** Linear, O(n+m), where n is the number of vertices and m is the number of edges.<br>
+* **Steps:** Construction of the implication graph in O(m), first DFS in O(n+m), construction of the mirror graph in O(n+m), and the second DFS performed on the mirror graph, also in O(n+m).<br>
+* **Result:** The overall complexity of the algorithm is linear with respect to the number of clauses.<br>
